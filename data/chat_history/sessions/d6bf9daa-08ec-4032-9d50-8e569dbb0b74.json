@@ -1,0 +1,273 @@
+{
+  "id": "d6bf9daa-08ec-4032-9d50-8e569dbb0b74",
+  "title": "Imported History",
+  "updated_at": "2026-04-16 16:03:32",
+  "messages": [
+    {
+      "role": "user",
+      "content": "can u tel me the spec for AVI64 card",
+      "created_at": "2026-04-13 11:40:19"
+    },
+    {
+      "role": "assistant",
+      "content": "Here are the key specifications for the Advantest V93000 AVI64 Universal Pin VI card:\n\n**Channel Configuration:**\n- Number of VI channels per card: 64 (8 groups, 8 channels each)\n\n**Voltage Ranges and Current Capability (per card):**\n- -40 V to +80 V: up to 0.8 A\n- ±30 V: up to 3.2 A\n- ±10 V (±3 V): up to 12.8 A\n\n**Notes:**\n- The maximum total current for any given range is fully independent of the total current used for other voltage ranges on the same card.\n- The above current values are the total for all channels in the specified range.\n\n**System Configuration:**\n- Maximum number of cards per system: 8 (A-Class), 16 (Compact), 32 (Small), 64 (Large test head)\n- Maximum number of VI channels per system: 512 (A-Class), 1024 (Compact), 2048 (Small), 4096 (Large test head)\n\n**Functionality:**\n- The AVI64 is a general-purpose V/I card with analog and high-voltage digital capabilities, optimized for universal analog pin applications.\n- Supported by EXA Scale and Smart Scale test systems.\n- Slot compatible with AVI64, DPS64, DPS128, PVI8, and Pure Clock cards.\n\n**Licensing:**\n- E8025AVI: Base capability for 64 channels (includes PMU, AWG, DGT, Kelvin test, surge tracker, profiling, floating differential voltmeter, high-resolution voltage AWG).\n- Upgrade licenses available for high-current unit, time measurement unit, and digital I/O mode.\n\n**Reference:**\n[Source: V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf, Pages 4-7]\n\nIf you need detailed per-channel specs (e.g., min/max voltage/current per channel, accuracy, resolution), please specify, and I can retrieve those as well.",
+      "meta": "Model: `gpt-4.1` | Complexity: `simple` | Query: Public | DB: `5` chunks | Web: `5` results",
+      "sources": [
+        {
+          "text": "V93000 Device Power Supplies: DC Scale AVI64 Universal Pin VI (E8025AVI)\nAVI64 block diagram and configuration\nBlock diagram\nConfiguration\nNumber of VI channels per card 64 (8 groups, 8 channels each)\nMaximum source / sink current per card Voltage ranges Maximum current per card in\nrange\n-40 V ... +80 V 0.8 A\n±30 V 3.2 A\n±10 V (±3 V) 12.8 A [1]\nMaximum total current for any given range is fully independent of\ntotal current used for other voltage ranges on the same card. [1]\nTotal current for all channels in both ranges. © 2026 Advantest Corporation All rights reserved. Page 5 of 111\nConfiguration |  | \nNumber of VI channels per card | 64 (8 groups, 8 channels each) | \n |  | \nMaximum source / sink current per card | Voltage ranges | Maximum current per card in\nrange\n | -40 V ... +80 V | 0.8 A\n | ±30 V | 3.2 A\n | ±10 V (±3 V) | 12.8 A [1]\n |  | \n | Maximum total current for any given range is fully independent of\ntotal current used for other voltage ranges on the same card. |",
+          "distance": 0.4452870488166809,
+          "source": "V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf",
+          "file_type": "datasheet",
+          "page_number": 5,
+          "total_pages": 111,
+          "has_tables": true,
+          "chunk_index": 0,
+          "rerank_score": 10
+        },
+        {
+          "text": "V93000 Device Power Supplies: DC Scale AVI64 Universal Pin VI (E8025AVI)\nDC Scale AVI64 Universal Pin VI (E8025AVI)\nThe AVI64 is a general purpose V/I card that features analog and high-voltage digital capabilities\nand is optimized for providing a true universal analog pin, covering a wide range of test application\nneeds. The card belongs to the DC Scale family and can reside in any channel card slot. This card is\nsupported by EXA Scale and Smart Scale test systems. Scope of specifications\nAdvantest specifies and verifies the specifications at the DUT interface pogo level. Using an\nadequate DUT board and valid system verification, these specifications are valid at the device under\ntest as well. Specifications describe warranted product performance. Characteristics are included\nas typical values to provide additional useful information by describing typical non-warranted\nperformance. AVI64 card photo\n© 2026 Advantest Corporation All rights reserved. Page 4 of 111",
+          "distance": 0.3704238533973694,
+          "source": "V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf",
+          "file_type": "datasheet",
+          "page_number": 4,
+          "total_pages": 111,
+          "has_tables": false,
+          "chunk_index": 0,
+          "rerank_score": 8
+        },
+        {
+          "text": "V93000 Device Power Supplies: DC Scale AVI64 Universal Pin VI (E8025AVI)\nConfiguration\nMaximum number of cards and channels A-Class Compact Small test head Large test head\ntest head test head\nMaximum number of cards per system 8 16 32 64\nMaximum number of VI channels per system 512 1024 2048 [2] 4096\nOther configuration data\n• AVI64 is slot compatible to AVI64, DPS64, DPS128, PVI8, and Pure Clock cards. • For an overview on required diagnostic and skew adjustment boards refer to Overview of\ndiagnostic and skew adjustment boards for Smart and EXA Scale (364553) in the service\ndocumentation. [2]\nUsing more than 1024 channels requires the DUT Scale Interface. © 2026 Advantest Corporation All rights reserved. Page 6 of 111\nConfiguration |  |  |  |  | \nMaximum number of cards and channels |  | A-Class\ntest head | Compact\ntest head | Small test head | Large test head\n | Maximum number of cards per system | 8 | 16 | 32 | 64\n | Maximum number of VI channels per system | 512 | 1024 | 2048 [2] | 4096",
+          "distance": 0.4111597537994385,
+          "source": "V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf",
+          "file_type": "datasheet",
+          "page_number": 6,
+          "total_pages": 111,
+          "has_tables": true,
+          "chunk_index": 0,
+          "rerank_score": 7
+        },
+        {
+          "text": "V93000 Device Power Supplies: DC Scale AVI64 Universal Pin VI (E8025AVI)\nAVI64 licensing\nTwo licensing models are available for the AVI64 card:\n• E8025AVI\nThe AVI64 base capability card includes the base capability for 64 channels as defined below. • E8025AVI-OP\nStarting with SmarTest 7.4.4 and 8.1.2, AVI64 is also available as InstaCard version that\nconsists of the plain hardware. The N8025BC and N8025BCX licenses are required to add the\nbase capability. The basic capabilities can be extended by upgrade licenses for the Floating high-current unit, the\nTime measurement unit, and the Digital I/O operating mode. Product number License Description\nE8025AVI Base Capability The E8025AVI card includes the The base capability of an AVI64\nbase capability for 64 channels. card covers the complete PMU\n(64 channels)\nfunctionality including the AWG\nand the DGT, the Kelvin test unit,\nN8025BC Base Capability The license enables the base\nthe surge tracker, profiling, the\ncapability of an E8025AVI-OP\nfloating differential voltmeter, and\ncard for the first 32 channels\nthe high-resolution voltage AWG. (channels 1 through 32). N8025BCX Base Capability Extension The license extends the base\ncapability of an E8025AVI-OP\ncard from 32 channels to 64\nchannels (channels 33 through\n64). N8026UP High current unit (HCU) Floating high-current unit upgrade license. A license for the floating high-current unit covers one shared unit and\nthe connection to all channels of the related eight-channel group. N8027UP Time measurement unit (TMU) Time measurement unit upgrade license.",
+          "distance": 0.42825424671173096,
+          "source": "V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf",
+          "file_type": "datasheet",
+          "page_number": 7,
+          "total_pages": 111,
+          "has_tables": true,
+          "chunk_index": 0,
+          "rerank_score": 6
+        },
+        {
+          "text": "V93000 Device Power Supplies: DC Scale AVI64 Universal Pin VI (E8025AVI)\nAVI64 PMU voltage and current capability specifications\nVoltage and current capabilities per channel\nAVI64 PMU voltage and current capability per channel\n© 2026 Advantest Corporation All rights reserved. Page 11 of 111",
+          "distance": 0.4522460103034973,
+          "source": "V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf",
+          "file_type": "datasheet",
+          "page_number": 11,
+          "total_pages": 111,
+          "has_tables": false,
+          "chunk_index": 0,
+          "rerank_score": 6
+        }
+      ],
+      "web_sources": [
+        {
+          "title": "V93000 - Advantest",
+          "url": "https://www3.advantest.com/en_SG/products/ic-test-systems/v93000",
+          "snippet": "Increased test coverage, faster time-to-market and superior test economics are achieved with the universal pin architecture on the PS1600 andAVI64cards, highly integrated RF and mixed signalcardsand best-in-class DPS and VIcards.",
+          "content": "V93000 - Advantest Skip to Content Login 日本語 Cookie Setting V93000 SoC Test System The Scalable SoC Test Platform The requirements of todays industry for even higher speeds, performance and pin counts means that test systems must offer greater functionality while maintaining low cost of test. With its scalable platform architecture, the V93000 tests a wide range of devices, from low cost IoT to high end, such as advanced automotive devices or highly integrated multicore processors. Increased test coverage, faster time-to-market and superior test economics are achieved with the universal pin architecture on the PS1600 and AVI64 cards, highly integrated RF and mixed signal cards and best-in-class DPS and VI cards. Meeting todays test needs requires not only innovative technology, but also an extendable system architecture to ensure long equipment lifetime, for the greatest return on customers’ capital investment. Advantest’s V93000 Smart Scale generation incorporates innovative per-pin testing capabilities. Each pin runs it own sequencer program for maximum flexibility and performance, for example in multisite applications. Full test processor control ensures time synchronization between all card types, like digital, Power, RF, mixed signal and so on. The user benefits are reduced test time, best repeatability and simplified program creation. The system design makes it easy to extend your configuration with new modules and instrumentation, as your test needs change. NEW V93000 EXA Scale™ Platform RF Solution Digital Solution PAC Solution Cards Lineup Direct Probe The Ultimate Choice in Scalability THE V93000 SCALABLE PLATFORM The V93000 single scalable platform offers a full range of compatible tester classes, from the smallest A-class to the largest L-class to maximize your return-on-investment. The class determines the possible size of the configuration and allows to fit the size and performance of the tested device. All features and performance points are available in all classes. V93000 SCALABLE BUILDING BLOCKS Compatibility across the whole platform All card types fit in all test heads, which provide the same power, cooling and computer interfacing to each card, independent of tester size. DUT boards can be exchanged, as well as test programs. The scalable design is a key capability to enable outstanding device portfolio coverage and test cost advantages in one single test platform. Capabilities when and where they are needed Floating licenses which can be shared within a tester or between testers, enable additional capabilities like more speed and more memory while optimizing investments. Large Installed Base Staying focused on the single scalable platform strategy, Advantest has developed a significant installed base of V93000 test systems in both engineering and high volume manufacturing. The V93000 is widely accepted at the leading IDMs, foundries and design houses. Outsourcing IDMs and fabless companies find V93000 test capacity installed in all leading OSATs worldwide. RF Solution Architecturally advanced cards provide the high parallelism and massive multi-site capabilities that allow customers to cost-effectively test current and upcoming generations of communication devices. To remain on pace with the semiconductor technology advances leading to next-generation 5G wireless communications, testing capabilities for RF and mixed-signal ICs must reach new highs in parallelism and throughput. ADVANTEST’s Wave Scale generation of channel cards for the V93000 platform enable highly parallel multi-site and in-site testing that dramatically reduces the cost of test and ultimately the time to market for current and future devices. Paving the Way for Testing 5G ICs Wave Scale RF and Wave Scale MX cards help to create paths for testing 5G devices by delivering high-efficiency test solutions for the ICs used in both today’s and emerging 5G NR (3GPP new radio), LTE, LTE-Advanced and LTE-A Pro smart phones as well as LTE-M, WLAN, GPS, ZigBee, Bluetooth and IoT applications. The cards’ advanced architectures allow for highly parallel testing of multiple communication standards or multiple paths within each device, resulting in high multi-site efficiency and a much lower cost of test. Versatile Digital Solution Coverage of the digital space from structural wafer sort to high end characterization test, from consumer space to highend, from mobile APU to GPU/CPU and AI devices. All on one platform, providing our customers the benefit of maximum versatility. Industry Challenges The drive for more functions per die and the drive for power reduction to enable ever longer battery lifetime of mobile devices drives technology nodes. Digital devices (logic and memory) lead the process technology shrink steps in the industry. Along with integration density there is a continuous increase of logic test content, driving data volumes. Very high speed I/O technology, SerDes based (such as PCIe, USB, HDMI.. ) is proliferating in",
+          "score": 3.1666666666666665,
+          "lexical_score": 0.16666666666666666,
+          "domain_score": 2.5,
+          "query_hits": 3,
+          "llm_score": 9
+        },
+        {
+          "title": "Advantest Extends V93000 Platform's Capabilities to Include Parametric ...",
+          "url": "https://advantest.com/en/news/2018/20181030.html",
+          "snippet": "Each SMUcardhas eight channels capable of 500 microvolt voltage-setting accuracy and 500 femtoamp current-measuring accuracy. Equipping the V93000 SMU8 with the optional DC ScaleAVI64universal analog pin module extends the system's voltage capability to -40 volts to +80 volts to accommodate an even wider range of ICs processes including ...",
+          "content": "Each SMUcardhas eight channels capable of 500 microvolt voltage-setting accuracy and 500 femtoamp current-measuring accuracy. Equipping the V93000 SMU8 with the optional DC ScaleAVI64universal analog pin module extends the system's voltage capability to -40 volts to +80 volts to accommodate an even wider range of ICs processes including ...",
+          "score": 3.0166666666666666,
+          "lexical_score": 0.16666666666666666,
+          "domain_score": 2.5,
+          "query_hits": 1,
+          "llm_score": 8
+        },
+        {
+          "title": "Fast Tera-Ohm Measurement Approach Using V93k AVI64 DC Scale Card | IEEE Conference Publication | IEEE Xplore",
+          "url": "https://ieeexplore.ieee.org/iel7/8726168/8730915/08730977.pdf",
+          "snippet": "This paper describes a measurement approach for massive parallel testing enabling characterization of Mega-Ohm resistor and Giga-Ohm isolation structures for process characterization using low power test conditions with Advantest V93000 AVI64 equipment. Moreover, it exhibits the technique how ...",
+          "content": "This paper describes a measurement approach for massive parallel testing enabling characterization of Mega-Ohm resistor and Giga-Ohm isolation structures for process characterization using low power test conditions with Advantest V93000 AVI64 equipment. Moreover, it exhibits the technique how ...",
+          "score": 3.65,
+          "lexical_score": 0.25,
+          "domain_score": 2.5,
+          "query_hits": 1,
+          "llm_score": 7
+        },
+        {
+          "title": "V93000｜SoC Test Systems｜ADVANTEST CORPORATION",
+          "url": "https://advantest.com/en/products/semiconductor-test-system/soc/v93000",
+          "snippet": "All features and performance points are available in all classes. Allcardtypes fit in all test heads, which provide the same power, cooling and computer interfacing to eachcard, independent of tester size. DUT boards can be exchanged, as well as test programs.",
+          "content": "All features and performance points are available in all classes. Allcardtypes fit in all test heads, which provide the same power, cooling and computer interfacing to eachcard, independent of tester size. DUT boards can be exchanged, as well as test programs.",
+          "score": 3.54,
+          "lexical_score": 0.2,
+          "domain_score": 2.5,
+          "query_hits": 3,
+          "llm_score": 6
+        },
+        {
+          "title": "V93000 Technical Documentation - Advantest",
+          "url": "https://www3.advantest.com/en/service-support/ic-test-systems/products-list/v93000-technical-documentation",
+          "snippet": "The Technical Documentation Center (TDC) is a stand-alone help application to view, navigate, and search the V93000 documentation. It provides an AI-powered assistant that helps test engineers quickly find answers, retrieve documents, and get step-by-step guidance — all through natural language queries without complex search syntax. Built on Retrieval-Augmented Generation (RAG), the chatbot ...",
+          "content": "V93000 Technical Documentation - Advantest Skip to Content Login 日本語 Cookie Setting V93000 Technical Documentation V93000 Technical Documentation The Technical Documentation Center (TDC) is a stand-alone help application to view, navigate, and search the V93000 documentation. It provides an AI-powered assistant that helps test engineers quickly find answers, retrieve documents, and get step-by-step guidance — all through natural language queries without complex search syntax. Built on Retrieval-Augmented Generation (RAG), the chatbot combines semantic search with generative AI to deliver precise, context-aware answers from the complete TDC content. Key Benefits Faster Access to Knowledge: Instant, citation-backed answers for quick decisions. Enhanced Productivity: Targeted document retrieval reduces search time. Global Collaboration: Multi-language support for seamless teamwork. Data Privacy & Trust: No default data training, no query logs—compliant and secure. Current capabilities and limitations You might have to reload the page to load the video. Your browser does not support the HTML5 video element. For more information see How to use the TDC . Accessing the TDC You can access the TDC in several ways: Browse the Online TDC Download and install the standalone version of the TDC (Windows or Linux) Open the TDC in SmarTest (choose Help > Help Contents ). Download You can download the V93000 documentation from the Software Center . Access to the Software Center requires an service agreement with Advantest. If not already done, request access to the Software Center by logging in the myAdvantest portal and click Self Services > Software Center > Request . As soon the request is approved you get notified and can log in to the Software Center. To access the Software Center log in to myAdvantest portal. For Microsoft Windows 10 and 11 download and install the Advantest Technical Documentation Center (TDC Viewer) first before you add documentation packages. For installation details see Installing and updating the standalone TDC . For Red Hat Enterprise Linux (RHEL 7.9 and RHEL 9) the help viewer is installed per default on your workstation. Start the Technical Documentation Center from the main menu > Advantest V93000 > Technical Documentation Center . The SmarTest documentation RPM is installed together with SmarTest. You do not need to install the RPMs separately. Download and install the V93000 documentation. SmarTest 8 Documentation Service EXA Scale Documentation SmarTest 7.6 and 7.10 Documentation Service Smart Scale Documentation Older versions You can also download previous V93000 documentation (6.3 - 7.4) from the Software Center > Old SmarTest+Platform/DVD > Documentation . Global Services Product Support V93000 Related Information Inquiry Contact Us Customer w/o \"System Handle\" or \"PIN\" code Support Request Customer with \"System Handle\" or \"PIN\" code Product Catalog IC Test Systems Copyright 1995 – 2026 ADVANTEST CORPORATION We only use cookies on this site to enhance your user experience and to optimize the functionality of this website. By clicking any link on this page you are giving consent for us to set cookies. Click on more information for further details. OK, I agree -->",
+          "score": 3.14,
+          "lexical_score": 0.2,
+          "domain_score": 2.5,
+          "query_hits": 3,
+          "llm_score": 5
+        }
+      ],
+      "query_type": "O",
+      "created_at": "2026-04-13 11:41:03"
+    },
+    {
+      "role": "user",
+      "content": "can u generate the AVI64 spec document which I can download?",
+      "created_at": "2026-04-14 22:24:47"
+    },
+    {
+      "role": "assistant",
+      "content": "The official Advantest AVI64 (E8025AVI) specification document is proprietary and cannot be generated for direct download due to copyright and distribution restrictions. However, I can summarize key specifications and features from the internal knowledge base for your reference:\n\n---\n\n### Advantest V93000 DC Scale AVI64 Universal Pin VI (E8025AVI) – Key Specifications\n\n**General:**\n- 64 universal analog/digital channels per card\n- Supported on EXA Scale and Smart Scale systems\n- Can reside in any channel card slot\n\n**Licensing:**\n- E8025AVI: Base capability for 64 channels (PMU, AWG, DGT, Kelvin test, surge tracker, profiling, floating differential voltmeter, high-res voltage AWG)\n- E8025AVI-OP: InstaCard hardware version (requires N8025BC/N8025BCX licenses)\n- Upgrades: High current unit (N8026UP), Time measurement unit (N8027UP), Digital I/O mode (N8028UP)\n\n**Digital I/O Mode:**\n- Vector period: 2.5 ns ... 31250 ns (±15 ppm accuracy)\n- Edge placement: -1 ... 32 vector periods (1 ps resolution)\n- Memory per channel: 107 MB\n- Driver voltage range: -8 V ≤ VIL, VIH, VT ≤ +8 V (standard), -40 V ≤ VIL, VIH, VT ≤ +80 V (extended)\n- Level accuracy: ±(30 mV + 0.1% of setting) (standard), ±(50 mV + 0.1% of setting) (extended)\n- Max drive current: ±50 mA\n- Driver slew rate: 50 V/μs @ 3 V swing, 80 V/μs @ 12 V swing\n- Max driver swing: 16 V (standard), 32 V (extended)\n- Data rate: up to 10 Mbps (3V swing), 5 Mbps (5V swing), 2.5 Mbps (12V swing), 1 Mbps (24V swing)\n- Min pulse width: 100 ns (3V), 400 ns (12V)\n- Edge placement accuracy: ±10 ns\n\n**PMU (Parametric Measurement Unit):**\n- Voltage and current capability per channel (see full datasheet for detailed tables)\n\n**Connectivity:**\n- E8025AVP pogo cable assembly connects all 64 channels to DUT board\n\n**Best Practices:**\n- Always verify specifications at the DUT interface pogo level using a validated DUT board.\n- Ensure correct licensing for required features (Digital I/O, HCU, TMU).\n\n---\n\nFor the full, official specification document, please refer to the internal file:\n- V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf\n\nIf you require the complete PDF, please request it through your Advantest or internal documentation portal, as distribution is restricted.\n\nCitations:\n- [Source: V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf, Pages 4, 7, 11, 23, 27]\n\nIf you need a specific section or table from the document, let me know and I can extract and summarize it for you.",
+      "meta": "Model: `gpt-4.1` | Complexity: `simple` | Query: Public | DB: `5` chunks | Web: `5` results",
+      "sources": [
+        {
+          "text": "V93000 Device Power Supplies: DC Scale AVI64 Universal Pin VI (E8025AVI)\nDC Scale AVI64 Universal Pin VI (E8025AVI)\nThe AVI64 is a general purpose V/I card that features analog and high-voltage digital capabilities\nand is optimized for providing a true universal analog pin, covering a wide range of test application\nneeds. The card belongs to the DC Scale family and can reside in any channel card slot. This card is\nsupported by EXA Scale and Smart Scale test systems. Scope of specifications\nAdvantest specifies and verifies the specifications at the DUT interface pogo level. Using an\nadequate DUT board and valid system verification, these specifications are valid at the device under\ntest as well. Specifications describe warranted product performance. Characteristics are included\nas typical values to provide additional useful information by describing typical non-warranted\nperformance. AVI64 card photo\n© 2026 Advantest Corporation All rights reserved. Page 4 of 111",
+          "distance": 0.46281373500823975,
+          "source": "V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf",
+          "file_type": "datasheet",
+          "page_number": 4,
+          "total_pages": 111,
+          "has_tables": false,
+          "chunk_index": 0,
+          "rerank_score": 9
+        },
+        {
+          "text": "V93000 Device Power Supplies: DC Scale AVI64 Universal Pin VI (E8025AVI)\nAVI64 digital driver, comparator, and TMU specifications\nDigital I/O operation mode\nThe Digital I/O operation mode can be selected on a per channel granularity. Changing the mode\nbetween the \"Digital I/O operating mode\" and the \"PMU operating mode\" (and vice versa) within a\ntest program flow is supported independently for every channel. An upgrade license N8028UP is required for operating an AVI64 channel in the Digital I/O mode. Digital I/O operation mode\nVector period range 2.5 ns ... 31250 ns\nVector period accuracy ±15 ppm of period setting\nVector period resolution 0.001 fs\nEdge placement range [59] -1 ... 32 vector periods\nEdge placement resolution 1 ps\nTotal available memory per channel 107 MByte\n[60]\nDigital driver\n-8 V ≤ VIL, VIH, VT ≤ +8 V -40 V ≤ VIL, VIH, VT ≤ + 80 V\nDriver states VIL, VIH, VT [61], High-Z VIL, VIH, VT [61], High-Z\nLevel accuracy ± (30 mV + 0.1 % of setting) ± (50 mV + 0.1 % of setting)\nOvershoot / undershoot 10 % of programmed level 10 % of programmed level\nMaximum drive current ± 50 mA ± 50 mA\nDriver slew rate (typical) 50 V / µs @ 3 V swing 80 V / µs @ 12 V swing\nMinimum pulse width 100 ns at 3 V swing 400 ns at 12 V swing\nMaximum driver swing 16 V 32 V\nMaximum data rate (20% / 80%); tr, tf < (Tcycle / 2): [62]\n3V swing 10 Mbps 5 Mbps\n5V swing 5 Mbps 5 Mbps\n12V swing 2.5 Mbps 2.5 Mbps\n24V swing n/a 1 Mbps\nDelay time active # high-Z 10 μs (maximum) 10 μs (maximum)\nEdge placement accuracy (EPA) ± 10 ns [63] ± 10 ns [63]\n[59]\nMaximum edge placement range is -6250 ns to +19000 ns.",
+          "distance": 0.5166233777999878,
+          "source": "V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf",
+          "file_type": "datasheet",
+          "page_number": 23,
+          "total_pages": 111,
+          "has_tables": true,
+          "chunk_index": 0,
+          "rerank_score": 8
+        },
+        {
+          "text": "V93000 Device Power Supplies: DC Scale AVI64 Universal Pin VI (E8025AVI)\nAVI64 licensing\nTwo licensing models are available for the AVI64 card:\n• E8025AVI\nThe AVI64 base capability card includes the base capability for 64 channels as defined below. • E8025AVI-OP\nStarting with SmarTest 7.4.4 and 8.1.2, AVI64 is also available as InstaCard version that\nconsists of the plain hardware. The N8025BC and N8025BCX licenses are required to add the\nbase capability. The basic capabilities can be extended by upgrade licenses for the Floating high-current unit, the\nTime measurement unit, and the Digital I/O operating mode. Product number License Description\nE8025AVI Base Capability The E8025AVI card includes the The base capability of an AVI64\nbase capability for 64 channels. card covers the complete PMU\n(64 channels)\nfunctionality including the AWG\nand the DGT, the Kelvin test unit,\nN8025BC Base Capability The license enables the base\nthe surge tracker, profiling, the\ncapability of an E8025AVI-OP\nfloating differential voltmeter, and\ncard for the first 32 channels\nthe high-resolution voltage AWG. (channels 1 through 32). N8025BCX Base Capability Extension The license extends the base\ncapability of an E8025AVI-OP\ncard from 32 channels to 64\nchannels (channels 33 through\n64). N8026UP High current unit (HCU) Floating high-current unit upgrade license. A license for the floating high-current unit covers one shared unit and\nthe connection to all channels of the related eight-channel group. N8027UP Time measurement unit (TMU) Time measurement unit upgrade license.",
+          "distance": 0.5233278274536133,
+          "source": "V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf",
+          "file_type": "datasheet",
+          "page_number": 7,
+          "total_pages": 111,
+          "has_tables": true,
+          "chunk_index": 0,
+          "rerank_score": 8
+        },
+        {
+          "text": "V93000 Device Power Supplies: DC Scale AVI64 Universal Pin VI (E8025AVI)\nAVI64 PMU voltage and current capability specifications\nVoltage and current capabilities per channel\nAVI64 PMU voltage and current capability per channel\n© 2026 Advantest Corporation All rights reserved. Page 11 of 111",
+          "distance": 0.4967699646949768,
+          "source": "V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf",
+          "file_type": "datasheet",
+          "page_number": 11,
+          "total_pages": 111,
+          "has_tables": false,
+          "chunk_index": 0,
+          "rerank_score": 7
+        },
+        {
+          "text": "V93000 Device Power Supplies: DC Scale AVI64 Universal Pin VI (E8025AVI)\nAVI64 pogo pin assignment\nThe E8025AVP pogo cable assembly connects the 64 channels of the DC Scale AVI64 card to the\nDUT board. © 2026 Advantest Corporation All rights reserved. Page 27 of 111",
+          "distance": 0.5078830718994141,
+          "source": "V93000_SOC_Device_Power_Supplies_and_VI_Cards.pdf",
+          "file_type": "datasheet",
+          "page_number": 27,
+          "total_pages": 111,
+          "has_tables": false,
+          "chunk_index": 0,
+          "rerank_score": 7
+        }
+      ],
+      "web_sources": [
+        {
+          "title": "Download-center » Auvitran » INTERFACES_CARDS - Zapaudio",
+          "url": "https://zapaudio.com/webzap/download-center/index_inclus.php?dir=Auvitran%2FINTERFACES_CARDS%2F",
+          "snippet": "AuviTran_AudioToolBox_AxC-AVB_EN.pdf373KB Sep 18 2019 11:00:36 AMavi64-es100_datasheet.pdf2298KB Mar 01 2010 05:19:17 PM avkit-es_dataheet.pdf3364KB Mar 01 2010 05:17:26 PM avx48-es100_datasheet.pdf2608KB Mar 01 2010 05:20:30 PM avy-16es100_datasheet.pdf2072KB Mar 01 2010 05:21:06 PM avy-16es_datasheet.pdf625KB Mar 01 2010 05:17:57 PM",
+          "content": "AuviTran_AudioToolBox_AxC-AVB_EN.pdf373KB Sep 18 2019 11:00:36 AMavi64-es100_datasheet.pdf2298KB Mar 01 2010 05:19:17 PM avkit-es_dataheet.pdf3364KB Mar 01 2010 05:17:26 PM avx48-es100_datasheet.pdf2608KB Mar 01 2010 05:20:30 PM avy-16es100_datasheet.pdf2072KB Mar 01 2010 05:21:06 PM avy-16es_datasheet.pdf625KB Mar 01 2010 05:17:57 PM",
+          "score": 1.2200000000000002,
+          "lexical_score": 0.5,
+          "domain_score": 0.0,
+          "query_hits": 2,
+          "llm_score": 9
+        },
+        {
+          "title": "Download-center » Auvitran » INTERFACES_CARDS - Zapaudio",
+          "url": "https://zapaudio.com/webzap/download-center/index_inclus.php?dir=Auvitran%2FINTERFACES_CARDS%2F&sort=size&order=asc",
+          "snippet": "AuviTran_AudioToolBox_AxC-AVB_EN.pdf373KB Sep 18 2019 11:00:36 AM avy-16es_datasheet.pdf625KB Mar 01 2010 05:17:57 PM avy-16es100_datasheet.pdf2072KB Mar 01 2010 05:21:06 PMavi64-es100_datasheet.pdf2298KB Mar 01 2010 05:19:17 PM avx48-es100_datasheet.pdf2608KB Mar 01 2010 05:20:30 PM avkit-es_dataheet.pdf3364KB Mar 01 2010 05:17:26 PM",
+          "content": "AuviTran_AudioToolBox_AxC-AVB_EN.pdf373KB Sep 18 2019 11:00:36 AM avy-16es_datasheet.pdf625KB Mar 01 2010 05:17:57 PM avy-16es100_datasheet.pdf2072KB Mar 01 2010 05:21:06 PMavi64-es100_datasheet.pdf2298KB Mar 01 2010 05:19:17 PM avx48-es100_datasheet.pdf2608KB Mar 01 2010 05:20:30 PM avkit-es_dataheet.pdf3364KB Mar 01 2010 05:17:26 PM",
+          "score": 0.75,
+          "lexical_score": 0.25,
+          "domain_score": 0.0,
+          "query_hits": 1,
+          "llm_score": 9
+        },
+        {
+          "title": "AVi64-ES100 datasheet by AuviTran - Issuu",
+          "url": "https://issuu.com/auvitran/docs/auvitran_avi64-es100_datasheet",
+          "snippet": "AVi64-ES100 brings EtherSound ES100 connectivity to RME products with i64 slot - Allows use of RME ADi8QS with EtherSound",
+          "content": "AVi64-ES100 brings EtherSound ES100 connectivity to RME products with i64 slot - Allows use of RME ADi8QS with EtherSound",
+          "score": 0.74,
+          "lexical_score": 0.25,
+          "domain_score": 0.0,
+          "query_hits": 2,
+          "llm_score": 8
+        },
+        {
+          "title": "AVI64 Adaptor Rev B | PDF - Scribd",
+          "url": "https://scribd.com/document/663915347/AVI64-Adaptor-Rev-B",
+          "snippet": "AVI64Adaptor Rev B - Free download as PDF File (.pdf) or read online for free.",
+          "content": "AVI64 Adaptor Rev B | PDF Skip to main content Open navigation menu Close suggestions Search Search en Change Language , English Upload Sign in Sign in 0 ratings 0% found this document useful (0 votes) 34 views 1 page AVI64 Adaptor Rev B Document Information Uploaded by Raj Download Save Save AVI64 Adaptor Rev B For Later Share 0% 0% found this document useful, undefined 0% , undefined Print Embed Report 0 ratings 0% found this document useful (0 votes) 34 views 1 page AVI64 Adaptor Rev B Read more Download 0 ratings 0% found this document useful (0 votes) 34 views 1 page AVI64 Adaptor Rev B Document Information Uploaded by Raj Go to previous items Go to next items Download Save Save AVI64 Adaptor Rev B For Later Share 0% 0% found this document useful, undefined 0% , undefined Print Embed Report Download Save AVI64 Adaptor Rev B For Later Fullscreen You are on page 1 1 Share this document Share on Facebook, opens a new window Share on LinkedIn, opens a new window Share with Email, opens mail client Copy link Millions of documents at your fingertips, ad-free Subscribe with a free trial Footer menu Back to top About About Scribd, Inc. Slideshare Join our team! Contact us Support Help / FAQ Accessibility Purchase help AdChoices Legal Terms Privacy Copyright Social Instagram Instagram Facebook Facebook Pinterest Pinterest Get our free apps About About Scribd, Inc. Slideshare Join our team! Contact us Legal Terms Privacy Copyright Support Help / FAQ Accessibility Purchase help AdChoices Social Instagram Instagram Facebook Facebook Pinterest Pinterest Get our free apps Documents Language : English Copyright © 2026 Scribd Inc. We take content rights seriously. Learn more in our FAQs or report infringement here . We take content rights seriously. Learn more in our FAQs or report infringement here . Language : English Copyright © 2026 Scribd Inc. 576648e32a3d8b82ca71961b7a986505",
+          "score": 1.3,
+          "lexical_score": 0.5,
+          "domain_score": 0.0,
+          "query_hits": 2,
+          "llm_score": 6
+        },
+        {
+          "title": "PDFAV64, AVH64, AVI64, AVIH64 Packages Created October - NeuroNexus",
+          "url": "https://neuronexus.com/files/probemapping/64-channel/Activus64+Maps.pdf",
+          "snippet": "A4x16-Poly2-5mm-23s-200-177 A8x8-5mm-70-gap-250-177",
+          "content": "A4x16-Poly2-5mm-23s-200-177 A8x8-5mm-70-gap-250-177",
+          "score": 0.8500000000000001,
+          "lexical_score": 0.25,
+          "domain_score": 0.0,
+          "query_hits": 2,
+          "llm_score": 5
+        }
+      ],
+      "query_type": "O",
+      "created_at": "2026-04-14 22:25:34"
+    },
+    {
+      "role": "user",
+      "content": "can u tell me the AVI64 spec and generate the document file for that",
+      "created_at": "2026-04-16 15:53:56"
+    },
+    {
+      "role": "assistant",
+      "content": "I've generated your **Technical Specification** based on our conversation. Click the button below to download `Technical_Specification:_Advantest_V93000_AVI64_Universal_Pi.docx`.",
+      "meta": "Model: `gpt-4.1` | Document: `Technical Specification` | DOCX",
+      "sources": [],
+      "web_sources": [],
+      "docx_id": "docx_5",
+      "created_at": "2026-04-16 15:54:10"
+    }
+  ]
+}

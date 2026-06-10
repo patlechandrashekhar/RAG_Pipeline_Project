@@ -1,0 +1,22 @@
+terJob	ADIN1300_A0_CHAR
+terPart	
+terEnv	
+terTI	
+terAC	40ns.Typ
+terDC	VDDIO_ALL_1P8V_10_PER.Min
+terGlobalSpecsPreviouslyAdded	Vcl_default,Vch_default,Vph_default
+terName	ADIN1300.xlsm
+terActiveSheetName	Flow Table Char
+terChanMap	ChanMap_pkg40_eng
+terChanMapViewMode	Signal
+terJob	ADIN1300_A0_CHAR
+terPart	
+terEnv	
+terTI	
+terAC	40ns.Typ
+terDC	VDDIO_ALL_1P8V_10_PER.Max
+terGlobalSpecsPreviouslyAdded	Vcl_default,Vch_default,Vph_default
+terName	ADIN1300.xlsm
+terActiveSheetName	Flow Table Char
+terChanMap	ChanMap_pkg40_eng
+terChanMapViewMode	Signal

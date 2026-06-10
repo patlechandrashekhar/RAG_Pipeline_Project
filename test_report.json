@@ -1,0 +1,125 @@
+{
+  "timestamp": "2026-04-19T14:25:48.047518",
+  "passed": 25,
+  "failed": 0,
+  "warnings": 3,
+  "tests": {
+    "passed": [
+      {
+        "test": "Import config_agentsdk",
+        "details": ""
+      },
+      {
+        "test": "Import ingestion_agentsdk",
+        "details": ""
+      },
+      {
+        "test": "Import retrieval_agentsdk",
+        "details": ""
+      },
+      {
+        "test": "Import generation_agentsdk",
+        "details": ""
+      },
+      {
+        "test": "Import rag_agent (original version)",
+        "details": ""
+      },
+      {
+        "test": ".env file exists",
+        "details": ""
+      },
+      {
+        "test": "Portkey API key configured",
+        "details": ""
+      },
+      {
+        "test": "System prompt loaded",
+        "details": "Length: 2605 chars"
+      },
+      {
+        "test": "File classification",
+        "details": "All 9 test cases passed"
+      },
+      {
+        "test": "Query classification",
+        "details": "All 6 test cases passed"
+      },
+      {
+        "test": "Semantic chunking",
+        "details": "Small: 6, Medium: 2, Large: 1 chunks"
+      },
+      {
+        "test": "Complexity classification",
+        "details": "All 4 test cases passed"
+      },
+      {
+        "test": "ChromaDB connection",
+        "details": "Path: C:\\AI Projects\\page_indexing_RAG\\data\\chroma_persistent_storage"
+      },
+      {
+        "test": "Collection 'tml_copilot_v3_titan'",
+        "details": "0 documents"
+      },
+      {
+        "test": "Collection 'tml_copilot_v2'",
+        "details": "8459 documents"
+      },
+      {
+        "test": "Claude Agent SDK import",
+        "details": "All required components imported"
+      },
+      {
+        "test": "Claude Agent SDK version",
+        "details": "0.1.63"
+      },
+      {
+        "test": "Original RAG agent",
+        "details": "Initialized, 8459 chunks in KB"
+      },
+      {
+        "test": "Original Streamlit app",
+        "details": "Found at app/streamlit_app.py"
+      },
+      {
+        "test": "Agent SDK Streamlit app (v1)",
+        "details": "Found at app/streamlit_app_agentsdk.py"
+      },
+      {
+        "test": "Agent SDK Streamlit app (v2)",
+        "details": "Found at app/streamlit_app_agent_sdk.py"
+      },
+      {
+        "test": "PDF data directory",
+        "details": "Exists with 5 files"
+      },
+      {
+        "test": "HTML data directory",
+        "details": "Exists with 1 files"
+      },
+      {
+        "test": "Text data directory",
+        "details": "Exists with 1 files"
+      },
+      {
+        "test": "ChromaDB storage",
+        "details": "Exists at C:\\AI Projects\\page_indexing_RAG\\data\\chroma_persistent_storage"
+      }
+    ],
+    "failed": [],
+    "warnings": [
+      {
+        "test": "Import rag_agent_sdk",
+        "warning": "claude-agent-sdk not installed - run: pip install claude-agent-sdk>=0.2.111"
+      },
+      {
+        "test": "AWS credentials",
+        "warning": "Not configured - Titan embeddings unavailable"
+      },
+      {
+        "test": "Agent SDK RAG",
+        "warning": "Claude Agent SDK not installed"
+      }
+    ]
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "ultraflex-rag": {
+      "command": "c:/AI Projects/.venv/Scripts/python.exe",
+      "args": [
+        "c:/AI Projects/page_indexing_RAG/ate-code-agent/rag_mcp_server.py"
+      ],
+      "env": {
+        "PYTHONHTTPSVERIFY": "0",
+        "CURL_CA_BUNDLE": "",
+        "REQUESTS_CA_BUNDLE": ""
+      }
+  
+    }
+  }
+}

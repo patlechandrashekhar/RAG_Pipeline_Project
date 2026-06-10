@@ -1,0 +1,95 @@
+DTFlowtableSheet,version=2.3:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Flow Table																																					
+						Flow Domain:																																
+			Gate			Command				Limits		Datalog Display Results			Bin Number		Sort Number			Action			Group				Device			Debug		CT Profile Data						
+	Label	Enable	Job	Part	Env	Opcode	Parameter	TName	TNum	LoLim	HiLim	Scale	Units	Format	Pass	Fail	Pass	Fail	Result	Pass	Fail	State	Specifier	Sense	Condition	Name	Sense	Condition	Name	Assume	Sites	Elapsed Time (s)	Background Type	Serialize	Resource Lock	Flow Step Locked	Comment	
+						Test	MLS_Spd_Cfg_Threshold												None																			
+						Use-Limit	MLS_Spd_Cfg_Threshold	 MLS_GP_OUT_Trip_Level_1
+		0	3.63		V			8		10	Fail																			
+						Use-Limit	MLS_Spd_Cfg_Threshold	MLS_GP_OUT_Trip_Level_2 
+		0	3.63		V			8		10	Fail																			
+						Use-Limit	MLS_Spd_Cfg_Threshold	MLS_GP_OUT_Trip_Level_3
+		0	3.63		V			8		10	Fail																			
+						Use-Limit	MLS_Spd_Cfg_Threshold	MLS_LED_0_Trip_Level_1
+		0	3.63		V			8		10	Fail																			
+						Use-Limit	MLS_Spd_Cfg_Threshold	MLS_LED_0_Trip_Level_2 
+		0	3.63		V			8		10	Fail																			
+						Use-Limit	MLS_Spd_Cfg_Threshold	MLS_LED_0_Trip_Level_3
+		0	3.63		V			8		10	Fail																			
+						Test	MLS_Auto_MDIX_Cfg_Threshold												None																			
+						Use-Limit	MLS_Auto_MDIX_Cfg_Threshold	MLS_GP_CLK_Trip_Level_1
+		0	3.63		V			8		10	Fail																			
+						Use-Limit	MLS_Auto_MDIX_Cfg_Threshold	MLS_GP_CLK_Trip_Level_2 
+		0	3.63		V			8		10	Fail																			
+						Use-Limit	MLS_Auto_MDIX_Cfg_Threshold	MLS_GP_CLK_Trip_Level_3
+		0	3.63		V			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	MLS_Energy_Det_Cfg_Threshold												None																			
+						Use-Limit	MLS_Energy_Det_Cfg_Threshold	MLS_LED_1_Trip_Level_1
+		0	3.63		V			8		10	Fail																			
+						Use-Limit	MLS_Energy_Det_Cfg_Threshold	MLS_LED_1_Trip_Level_2 
+		0	3.63		V			8		10	Fail																			
+						Use-Limit	MLS_Energy_Det_Cfg_Threshold	MLS_LED_1_Trip_Level_3
+		0	3.63		V			8		10	Fail																			
+			ADIN1300_A0_CHAR			Test	VOH_level_12mA												None																			
+						Use-Limit	VOH_level_12mA	VOH_level_12mA
+		1.35	3.63		V			8		10	Fail																			
+			!ADIN1301_A0_CHAR			Test	VOH_level_8mA												None																			
+						Use-Limit	VOH_level_8mA	VOH_level_8mA
+		2.4	3.63		V			8		10	Fail																			
+			!ADIN1301_A0_CHAR			Test	VOH_level_4mA												None																			
+						Use-Limit	VOH_level_4mA	VOH_level_4mA
+		1.35	3.63		V			8		10	Fail																			
+			!ADIN1301_A0_CHAR			Test	VOH_level_2mA												None																			
+						Use-Limit	VOH_level_2mA	VOH_level_2mA
+		1.35	3.63		V			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	VOH_level_12mA_64pkg												None																			
+						Use-Limit	VOH_level_12mA_64pkg	VOH_level
+		0	3.63		V			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	VOH_level_8mA_64pkg												None																			
+						Use-Limit	VOH_level_8mA_64pkg	VOH_level
+		0	3.63		V			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	VOH_level_4mA_64pkg												None																			
+						Use-Limit	VOH_level_4mA_64pkg	VOH_level
+		0	3.63		V			8		10	Fail																			
+			ADIN1300_A0_CHAR			Test	VOL_level_12mA												None																			
+						Use-Limit	VOL_level_12mA	VOL_level_12mA
+		0	0.4		V			8		10	Fail																			
+			!ADIN1301_A0_CHAR			Test	VOL_level_8mA												None																			
+						Use-Limit	VOL_level_8mA	VOL_level_8mA
+		0	0.4		V			8		10	Fail																			
+			!ADIN1301_A0_CHAR			Test	VOL_level_4mA												None																			
+						Use-Limit	VOL_level_4mA	VOL_level_4mA
+		0	0.4		V			8		10	Fail																			
+			!ADIN1301_A0_CHAR			Test	VOL_level_2mA												None																			
+						Use-Limit	VOL_level_2mA	VOL_level_2mA
+		0	0.4		V			8		10	Fail																			
+			!ADIN1301_A0_CHAR			Test	VOL_MDIO_level_4mA												None																			
+						Use-Limit	VOL_MDIO_level_4mA	VOL_level_4mA
+		0	0.4		V			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	VOL_level_12mA_64pkg												None																			
+						Use-Limit	VOL_level_12mA_64pkg	VOL_level
+		0	3.63		V			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	VOL_level_8mA_64pkg												None																			
+						Use-Limit	VOL_level_8mA_64pkg	VOL_level
+		0	3.63		V			8		10	Fail																			
+			!ADIN1301_A0_CHAR			Test	VIH_level												None																			
+						Use-Limit	VIH_level	VIH_Level
+		0	3.63		V			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	VOL_level_4mA_64pkg												None																			
+						Use-Limit	VOL_level_4mA_64pkg	VOL_level
+		0	3.63		V			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	VIH_level_64pkg												None																			
+						Use-Limit	VIH_level_64pkg	VIH_Level
+		0	3.63		V			8		10	Fail																			
+			!ADIN1301_A0_CHAR			Test	VIL_level												None																			
+						Use-Limit	VIL_level	VIL_Level
+		0	3.63		V			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	VIL_level_64pkg												None																			
+						Use-Limit	VIL_level_64pkg	VIL_Level
+		0	3.63		V			8		10	Fail																			
+						Test	VIH_level_INT_N												None																			
+						Use-Limit	VIH_level_INT_N	VIH_Level
+		0	3.63		V			8		10	Fail																			
+						Test	VIL_level_INT_N												None																			
+						Use-Limit	VIL_level_INT_N	VIL_Level
+		0	3.63		V			8		10	Fail																			
+						return																																

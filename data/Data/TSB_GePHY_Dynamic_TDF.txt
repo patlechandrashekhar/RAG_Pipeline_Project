@@ -1,0 +1,79 @@
+DTTimesetBasicSheet,version=2.3:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Time Sets (Basic)																	
+																		
+	Timing Mode:	Single		Master Timeset Name:														
+	Time Domain:			Strobe Ref Setup Name:														
+																		
+		Cycle	Pin/Group			Data		Drive				Compare				Edge Resolution		
+	Time Set	Period	Name	Clock Period	Setup	Src	Fmt	On	Data	Return	Off	Mode	Open	Close	Ref Offset	Mode	Comment	
+	TSET1	=_period	MDC		i/o	PAT	RL	0	= C8 * 0.3	= C8 * 0.7	=40*ns	Edge	Disable			Machine		
+	TSET1	=_period	RESET_N		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	Disable			Machine		
+	TSET1	=_period	TEST_EN		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	Disable			Machine		
+	TSET1	=_period	GP_CLK		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C11 * 0.2			Machine		
+	TSET1	=_period	GP_OUT		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C12 * 0.2			Machine		
+	TSET1	=_period	GTX_CLK		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C13 * 0.2			Machine		
+	TSET1	=_period	INT_N		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C14 * 0.2			Machine		
+	TSET1	=_period	LED_0		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C15 * 0.2			Machine		
+	TSET1	=_period	MDIO		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C16 * 0.2			Machine		
+	TSET1	=_period	RXD_0		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C17 * 0.2			Machine		
+	TSET1	=_period	RXD_1		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C18 * 0.2			Machine		
+	TSET1	=_period	RXD_2		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C19 * 0.2			Machine		
+	TSET1	=_period	RXD_3		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C20 * 0.2			Machine		
+	TSET1	=_period	RX_CLK		i/o	PAT	RL	0	= C21 * 0.4	= C21 * 0.5	=40*ns	Edge	=C21 * 0.2			Machine		
+	TSET1	=_period	RX_CTL		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C22 * 0.2			Machine		
+	TSET1	=_period	TXD_0		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C23 * 0.4			Machine		
+	TSET1	=_period	TXD_1		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C24 * 0.4			Machine		
+	TSET1	=_period	TXD_2		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C25 * 0.4			Machine		
+	TSET1	=_period	TXD_3		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C26 * 0.4			Machine		
+	TSET1	=_period	TX_CTL		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C27 * 0.4			Machine		
+	TSET1	=_period	TCK		i/o	PAT	RL	0	= C28 * 0.4	= C28 * 0.5	=40*ns	Edge	Disable			Machine		
+	TSET1	=_period	TDI		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C29 * 0.2			Machine		
+	TSET1	=_period	TMS		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C30 * 0.2			Machine		
+	TSET1	=_period	TDO		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C31 * 0.2			Machine		
+	TSET2	=_period	MDC		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	Disable			Machine		
+	TSET2	=_period	RESET_N		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	Disable			Machine		
+	TSET2	=_period	TEST_EN		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	Disable			Machine		
+	TSET2	=_period	GP_CLK		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C35 * 0.2			Machine		
+	TSET2	=_period	GP_OUT		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C36 * 0.2			Machine		
+	TSET2	=_period	GTX_CLK		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C37 * 0.2			Machine		
+	TSET2	=_period	INT_N		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C38 * 0.2			Machine		
+	TSET2	=_period	LED_0		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C39 * 0.2			Machine		
+	TSET2	=_period	MDIO		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C40 * 0.2			Machine		
+	TSET2	=_period	RXD_0		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C41 * 0.2			Machine		
+	TSET2	=_period	RXD_1		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C42 * 0.2			Machine		
+	TSET2	=_period	RXD_2		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C43 * 0.2			Machine		
+	TSET2	=_period	RXD_3		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C44 * 0.2			Machine		
+	TSET2	=_period	RX_CLK		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C45 * 0.2			Machine		
+	TSET2	=_period	RX_CTL		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C46 * 0.2			Machine		
+	TSET2	=_period	TXD_0		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C47 * 0.2			Machine		
+	TSET2	=_period	TXD_1		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C48 * 0.2			Machine		
+	TSET2	=_period	TXD_2		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C49 * 0.2			Machine		
+	TSET2	=_period	TXD_3		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C50 * 0.2			Machine		
+	TSET2	=_period	TX_CTL		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C51 * 0.2			Machine		
+	TSET2	=_period	TCK		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	Disable			Machine		
+	TSET2	=_period	TDI		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C53 * 0.2			Machine		
+	TSET2	=_period	TMS		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C54 * 0.2			Machine		
+	TSET2	=_period	TDO		i/o	PAT	NR	0	=0*ns		=40*ns	Edge	=C55 * 0.2			Machine		
+	TSET3	=_period / 5	MDC		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	Disable			Machine		
+	TSET3	=_period / 5	RESET_N		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	Disable			Machine		
+	TSET3	=_period / 5	TEST_EN		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	Disable			Machine		
+	TSET3	=_period / 5	GP_CLK		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C59 * 0.025			Machine		
+	TSET3	=_period / 5	GP_OUT		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C60 * 0.025			Machine		
+	TSET3	=_period / 5	GTX_CLK		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C61 * 0.025			Machine		
+	TSET3	=_period / 5	INT_N		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C62 * 0.025			Machine		
+	TSET3	=_period / 5	LED_0		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C63 * 0.025			Machine		
+	TSET3	=_period / 5	MDIO		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C64 * 0.025			Machine		
+	TSET3	=_period / 5	RXD_0		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C65 * 0.025			Machine		
+	TSET3	=_period / 5	RXD_1		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C66 * 0.025			Machine		
+	TSET3	=_period / 5	RXD_2		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C67 * 0.025			Machine		
+	TSET3	=_period / 5	RXD_3		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C68 * 0.025			Machine		
+	TSET3	=_period / 5	RX_CLK		i/o	PAT	RL	0	= C69 * 0.25	= C69 * 0.75	=8*ns	Edge	=C69 * 0.025			Machine		
+	TSET3	=_period / 5	RX_CTL		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C70 * 0.025			Machine		
+	TSET3	=_period / 5	TXD_0		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C71 * 0.025			Machine		
+	TSET3	=_period / 5	TXD_1		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C72 * 0.025			Machine		
+	TSET3	=_period / 5	TXD_2		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C73 * 0.025			Machine		
+	TSET3	=_period / 5	TXD_3		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C74 * 0.025			Machine		
+	TSET3	=_period / 5	TX_CTL		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C75 * 0.025			Machine		
+	TSET3	=_period / 5	TCK		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	Disable			Machine		
+	TSET3	=_period / 5	TDI		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C77 * 0.025			Machine		
+	TSET3	=_period / 5	TMS		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C78 * 0.025			Machine		
+	TSET3	=_period / 5	TDO		i/o	PAT	NR	0	=0*ns		=8*ns	Edge	=C79 * 0.025			Machine		

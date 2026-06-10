@@ -1,0 +1,14 @@
+DTTimesetBasicSheet,version=2.3:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Time Sets (Basic)																	
+																		
+	Timing Mode:	Single		Master Timeset Name:														
+	Time Domain:			Strobe Ref Setup Name:														
+																		
+		Cycle	Pin/Group			Data		Drive				Compare				Edge Resolution		
+	Time Set	Period	Name	Clock Period	Setup	Src	Fmt	On	Data	Return	Off	Mode	Open	Close	Ref Offset	Mode	Comment	
+	timing_1_0	=_period	alldigpins			PAT	NR		0		= C8 + J8	Edge	0.000000002			Auto		
+	timing_1_0	=_period	MDC			PAT	RL		=C9 * 0.05	= J9 + (C9 / 2)	= C9 + J9	Edge	0.000000002			Auto		
+	timing_1_0	=_period	MDIO			PAT	NR		0		= C10 + J10	Edge	= J9 + (C10 / 2)			Auto		
+	timing_1_0	=_period	TX_Pins			PAT	NR		= C11 * 1.1		= C11 + J11	Edge	0.000000002			Auto		
+	timing_1_0	=_period	XTAL_I	= 0.00000002	clock	ALLHI	RL		= C11 * 0.05	= J12 + (E12 / 2)	=C12	Off				Auto		
+	timing_1_0	=_period	RX_Pins			PAT	NR		0		= C13 + J13	Off	= C13 * 1.5			Auto		
+	timing_1_0	=_period	XTAL_O	= 0.00000002	clock	ALLHI	RL		0	= J14 + (E14 / 2)	=C14	Off				Auto		

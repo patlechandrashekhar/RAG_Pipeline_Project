@@ -1,0 +1,1087 @@
+"""UltraFlex IG-XL multi-agent building blocks.
+
+These agents are deterministic generators/parsers that use reference exports
+from an existing UltraFlex program to construct new program artifacts.
+"""
+
+from __future__ import annotations
+
+import csv
+import importlib
+import os
+import re
+import ssl
+from collections import defaultdict
+from dataclasses import dataclass
+from pathlib import Path
+from statistics import mean, pstdev
+from typing import Any
+
+import httpx  # Required by workspace SSL policy for all new scripts.
+import pdfplumber
+from langchain_core.output_parsers import StrOutputParser
+from langchain_core.prompts import ChatPromptTemplate
+
+from ..config import OPENAI_WEB_MODEL, get_chat_llm
+
+os.environ["PYTHONHTTPSVERIFY"] = "0"
+os.environ["CURL_CA_BUNDLE"] = ""
+os.environ["REQUESTS_CA_BUNDLE"] = ""
+ssl._create_default_https_context = ssl._create_unverified_context
+
+
+def _safe_read(path: Path) -> str:
+    if path.is_dir():
+        return ""
+    if not path.exists():
+        return ""
+    try:
+        return path.read_text(encoding="utf-8")
+    except (UnicodeDecodeError, PermissionError, OSError):
+        try:
+            return path.read_text(encoding="latin-1", errors="ignore")
+        except (PermissionError, OSError):
+            return ""
+
+
+def _write(path: Path, content: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content, encoding="utf-8")
+
+
+def _normalize_header(value: str) -> str:
+    return re.sub(r"[^a-z0-9]", "", str(value).lower())
+
+
+@dataclass
+class AgentContext:
+    base_program_path: Path
+
+    @property
+    def exports_dir(self) -> Path:
+        return self.base_program_path / "Exports"
+
+    @property
+    def datalog_dir(self) -> Path:
+        return self.base_program_path / "Datalogs"
+
+
+class _BaseAgent:
+    def __init__(self, context: AgentContext):
+        self.context = context
+
+    def _find_export(self, *candidates: str) -> Path | None:
+        for name in candidates:
+            p = self.context.exports_dir / name
+            if p.exists():
+                return p
+        return None
+
+    def _read_export(self, *candidates: str) -> str:
+        p = self._find_export(*candidates)
+        return _safe_read(p) if p else ""
+
+
+class VBTCodeWriterAgent(_BaseAgent):
+    """Dedicated agent for generating UltraFlex VBT/VB .bas modules."""
+
+    _prompt = ChatPromptTemplate.from_messages([
+        (
+            "system",
+            (
+                "You are a senior Teradyne UltraFlex IG-XL VBT engineer. "
+                "Write production-grade VB6-compatible .bas code for requested tests. "
+                "Use clear entry points, helper functions, setup/measure/evaluate pattern, "
+                "error handling, and conservative defaults for hardware safety. "
+                "Return only VB code, no markdown fences."
+            ),
+        ),
+        (
+            "user",
+            "Target Device: {device_name}\n"
+            "Module Name Hint: {module_name_hint}\n"
+            "User Request: {request_text}\n\n"
+            "Internal VBT Context:\n{internal_context}\n\n"
+            "Optional Web Context:\n{web_context}\n\n"
+            "Generate one complete .bas module."
+        ),
+    ])
+
+    def _internal_context(self, max_chars: int = 24000) -> str:
+        chunks: list[str] = []
+        for ext in ("*.bas", "*.cls"):
+            for p in sorted(self.context.exports_dir.glob(ext)):
+                txt = _safe_read(p)
+                if not txt:
+                    continue
+                chunks.append(f"===== {p.name} =====\n{txt[:3500]}")
+                joined = "\n\n".join(chunks)
+                if len(joined) >= max_chars:
+                    return joined[:max_chars]
+        return "\n\n".join(chunks)[:max_chars]
+
+    @staticmethod
+    def _web_context(query: str, max_results: int = 3) -> str:
+        try:
+            from ddgs import DDGS
+        except Exception:
+            return ""
+
+        snippets: list[str] = []
+        with DDGS() as ddgs:
+            q = f"Teradyne UltraFlex IG-XL VBT Visual Basic {query}"
+            try:
+                rows = ddgs.text(q, max_results=max_results)
+            except TypeError:
+                rows = ddgs.text(q)
+            except Exception:
+                rows = []
+
+            for row in (rows or [])[:max_results]:
+                title = str(row.get("title") or "").strip()
+                body = str(row.get("body") or "").strip()
+                href = str(row.get("href") or "").strip()
+                snippets.append(f"- {title}\n  {body}\n  {href}")
+        return "\n".join(snippets)
+
+    @staticmethod
+    def _sanitize_module_name(name: str) -> str:
+        cleaned = re.sub(r"[^A-Za-z0-9_]+", "_", (name or "").strip())
+        cleaned = re.sub(r"_+", "_", cleaned).strip("_")
+        return cleaned or "AutoGeneratedVBT"
+
+    @staticmethod
+    def _strip_code_fences(text: str) -> str:
+        t = text.strip()
+        if t.startswith("```"):
+            t = re.sub(r"^```[a-zA-Z0-9_\-]*\n", "", t)
+            t = re.sub(r"\n```$", "", t)
+        return t
+
+    def generate_from_prompt(
+        self,
+        device_name: str,
+        request_text: str,
+        module_name_hint: str | None = None,
+        use_web_knowledge: bool = True,
+    ) -> tuple[str, str]:
+        """Generate a single .bas module from free-form user request."""
+        module_name_hint = module_name_hint or "AutoGeneratedVBT"
+        module_name = f"Auto_{self._sanitize_module_name(module_name_hint)}.bas"
+
+        internal_context = self._internal_context()
+        web_context = self._web_context(request_text) if use_web_knowledge else ""
+
+        try:
+            chain = self._prompt | get_chat_llm(OPENAI_WEB_MODEL, temperature=0.1) | StrOutputParser()
+            raw = chain.invoke(
+                {
+                    "device_name": device_name,
+                    "module_name_hint": module_name_hint,
+                    "request_text": request_text,
+                    "internal_context": internal_context,
+                    "web_context": web_context or "(none)",
+                }
+            )
+            code = self._strip_code_fences(raw).strip()
+        except Exception:
+            code = ""
+
+        if not code:
+            code = (
+                f"Attribute VB_Name = \"{module_name[:-4]}\"\n"
+                "Option Explicit\n\n"
+                "Public Function Run_Test() As Long\n"
+                "    On Error GoTo EH\n"
+                "    ' TODO: implement generated logic\n"
+                "    Run_Test = 1\n"
+                "    Exit Function\n"
+                "EH:\n"
+                "    Run_Test = 0\n"
+                "End Function\n"
+            )
+
+        if not code.endswith("\n"):
+            code += "\n"
+        return module_name, code
+
+    def generate_for_required_tests(
+        self,
+        device_name: str,
+        required_tests: list[str],
+        use_web_knowledge: bool = True,
+    ) -> dict[str, str]:
+        out: dict[str, str] = {}
+        for test_name in [t.strip() for t in required_tests if t and t.strip()]:
+            module_name, code = self.generate_from_prompt(
+                device_name=device_name,
+                request_text=f"Generate VBT BAS implementation for test: {test_name}",
+                module_name_hint=test_name,
+                use_web_knowledge=use_web_knowledge,
+            )
+            out[module_name] = code
+        return out
+
+
+class InputSpecIngestionAgent(_BaseAgent):
+    """Parses user-provided pin mapping files and datasheet/spec documents."""
+
+    _PIN_KEYS = ("pinname", "pin", "signal", "name")
+    _TYPE_KEYS = ("type", "pintype", "iotype")
+    _PKG_KEYS = ("packagepin", "pkgpin", "ball", "ballname", "bga")
+    _COMMENT_KEYS = ("comment", "notes", "description")
+
+    @staticmethod
+    def _extract_site_index(normalized_header: str) -> int | None:
+        """Detect site index from common header shapes.
+
+        Supports patterns like: site0, site0channel, channelsite3, ch_site_2.
+        """
+        m = re.search(r"site(\d+)", normalized_header)
+        if m:
+            return int(m.group(1))
+        m = re.search(r"(?:^|[^a-z])s(\d+)(?:$|[^a-z0-9])", normalized_header)
+        if m:
+            return int(m.group(1))
+        return None
+
+    @staticmethod
+    def _header_mentions_other_package(normalized_header: str, package_pins: int) -> bool:
+        """Return True when header explicitly targets another known package size."""
+        for pkg in (32, 40, 64):
+            if str(pkg) in normalized_header and pkg != package_pins:
+                return True
+        return False
+
+    def _extract_site_channels_from_cells(
+        self,
+        row: dict[str, Any],
+        header_keys: list[str],
+        package_pins: int | None,
+        num_sites: int | None,
+    ) -> dict[str, str]:
+        """Extract site channel values from a generic row using flexible header matching."""
+        out: dict[str, str] = {}
+        max_sites = num_sites if num_sites and num_sites > 0 else 8
+
+        # Some user sheets label sites as 1..N instead of 0..N-1.
+        # Detect that shape once from headers and remap to 0-based keys.
+        detected_site_indices: list[int] = []
+        for h in header_keys:
+            idx = self._extract_site_index(_normalize_header(h))
+            if idx is not None:
+                detected_site_indices.append(idx)
+        one_based_site_headers = bool(detected_site_indices) and 0 not in detected_site_indices and min(detected_site_indices) == 1
+
+        for h in header_keys:
+            h_norm = _normalize_header(h)
+            site_idx = self._extract_site_index(h_norm)
+            if site_idx is None:
+                continue
+
+            if one_based_site_headers:
+                site_idx -= 1
+
+            if site_idx < 0 or site_idx >= max_sites:
+                continue
+
+            if package_pins is not None and self._header_mentions_other_package(h_norm, package_pins):
+                continue
+
+            val = str(row.get(h, "") or "").strip()
+            if val:
+                out[f"site{site_idx}"] = val
+
+        return out
+
+    @staticmethod
+    def _pick(cells: dict[str, Any], header_map: dict[str, str], keys: tuple[str, ...], default: str = "") -> str:
+        for key in keys:
+            if key in header_map:
+                return str(cells.get(header_map[key], default) or default).strip()
+        return default
+
+    def parse_pin_mapping_file(
+        self,
+        mapping_file: str,
+        package_pins: int | None = None,
+        num_sites: int | None = None,
+    ) -> list[dict[str, Any]]:
+        """Parse .xlsx/.csv pin mapping into normalized rows.
+
+        Expected columns (flexible names):
+        - Pin Name, Type, Package Pin, Site 0, Site 1, ..., Comment
+        """
+        path = Path(mapping_file)
+        if not path.exists():
+            return []
+
+        rows: list[dict[str, Any]] = []
+
+        if path.suffix.lower() == ".csv":
+            with path.open("r", encoding="utf-8", newline="") as f:
+                reader = csv.DictReader(f)
+                headers = reader.fieldnames or []
+                header_map = {_normalize_header(h): h for h in headers}
+                for raw in reader:
+                    pin = self._pick(raw, header_map, self._PIN_KEYS)
+                    if not pin:
+                        continue
+                    row = {
+                        "pin_name": pin,
+                        "type": self._pick(raw, header_map, self._TYPE_KEYS, "I/O") or "I/O",
+                        "package_pin": self._pick(raw, header_map, self._PKG_KEYS),
+                        "comment": self._pick(raw, header_map, self._COMMENT_KEYS),
+                    }
+
+                    row.update(
+                        self._extract_site_channels_from_cells(
+                            raw,
+                            list(headers),
+                            package_pins=package_pins,
+                            num_sites=num_sites,
+                        )
+                    )
+                    rows.append(row)
+            return rows
+
+        if path.suffix.lower() in (".xlsx", ".xlsm", ".xltx", ".xltm"):
+            try:
+                openpyxl = importlib.import_module("openpyxl")
+                load_workbook = getattr(openpyxl, "load_workbook")
+            except Exception:
+                return []
+
+            wb = load_workbook(path, data_only=True, read_only=True)
+            for ws in wb.worksheets:
+                all_rows = list(ws.iter_rows(values_only=True))
+                if not all_rows:
+                    continue
+
+                # Some user workbooks include metadata row(s) above the true header.
+                # Detect the first row that looks like a pin-map header.
+                header_idx = 0
+                scan_limit = min(len(all_rows), 20)
+                for i in range(scan_limit):
+                    candidate_headers = [str(x or "").strip() for x in all_rows[i]]
+                    candidate_map = {_normalize_header(h): idx for idx, h in enumerate(candidate_headers) if h}
+                    has_pin_col = any(k in candidate_map for k in self._PIN_KEYS)
+                    has_site_col = any(
+                        self._extract_site_index(_normalize_header(h)) is not None
+                        for h in candidate_headers
+                        if h
+                    )
+                    if has_pin_col and has_site_col:
+                        header_idx = i
+                        break
+
+                headers = [str(x or "").strip() for x in all_rows[header_idx]]
+                header_map = {_normalize_header(h): idx for idx, h in enumerate(headers) if h}
+
+                for r in all_rows[header_idx + 1:]:
+                    cells = {headers[i]: (r[i] if i < len(r) else "") for i in range(len(headers))}
+                    pin = ""
+                    for key in self._PIN_KEYS:
+                        if key in header_map:
+                            pin = str(r[header_map[key]] or "").strip()
+                            break
+                    if not pin:
+                        continue
+
+                    row = {
+                        "pin_name": pin,
+                        "type": "I/O",
+                        "package_pin": "",
+                        "comment": "",
+                    }
+                    for key in self._TYPE_KEYS:
+                        if key in header_map:
+                            row["type"] = str(r[header_map[key]] or "I/O").strip() or "I/O"
+                            break
+                    for key in self._PKG_KEYS:
+                        if key in header_map:
+                            row["package_pin"] = str(r[header_map[key]] or "").strip()
+                            break
+                    for key in self._COMMENT_KEYS:
+                        if key in header_map:
+                            row["comment"] = str(r[header_map[key]] or "").strip()
+                            break
+
+                    row.update(
+                        self._extract_site_channels_from_cells(
+                            cells,
+                            headers,
+                            package_pins=package_pins,
+                            num_sites=num_sites,
+                        )
+                    )
+
+                    rows.append(row)
+            return rows
+
+        return []
+
+    def extract_datasheet_specs(self, datasheet_path: str, max_pages: int = 40) -> dict[str, Any]:
+        """Extract key supply/timing hints from a datasheet/spec PDF or text file."""
+        path = Path(datasheet_path)
+        if not path.exists() or path.is_dir():
+            return {}
+
+        text = ""
+        if path.suffix.lower() == ".pdf":
+            try:
+                with pdfplumber.open(path) as pdf:
+                    for page in pdf.pages[:max_pages]:
+                        text += (page.extract_text() or "") + "\n"
+            except Exception:
+                return {}
+        else:
+            text = _safe_read(path)
+
+        text_u = text.upper()
+        specs: dict[str, Any] = {
+            "supply_voltages": {},
+            "interface_speeds": [],
+            "timing_selectors": [],
+        }
+
+        rail_patterns = {
+            "VDD0P9": r"VDD0\s*P?9[^0-9]{0,25}(0\.\d+|1\.0|0\.9)",
+            "AVDD3P3": r"AVDD3\s*P?3[^0-9]{0,25}(3\.\d+)",
+            "VDDIO_R": r"VDDIO[_\s-]?R[^0-9]{0,30}(1\.8|2\.5|3\.3)",
+            "VDDIO_M": r"VDDIO[_\s-]?M[^0-9]{0,30}(1\.8|2\.5|3\.3)",
+            "VDDIO": r"VDDIO[^0-9]{0,30}(1\.8|2\.5|3\.3)",
+        }
+        for rail, pat in rail_patterns.items():
+            m = re.search(pat, text_u)
+            if m:
+                try:
+                    specs["supply_voltages"][rail] = float(m.group(1))
+                except ValueError:
+                    continue
+
+        speed_map = {
+            "1000T": ("1000BASE-T", "1Gbps", "1 Gbps", "1000T"),
+            "100T": ("100BASE-T", "100Mbps", "100 Mbps", "100T"),
+            "10T": ("10BASE-T", "10Mbps", "10 Mbps", "10T"),
+        }
+        for key, hints in speed_map.items():
+            if any(h.upper() in text_u for h in hints):
+                specs["interface_speeds"].append(key)
+
+        if "RGMII" in text_u:
+            specs["timing_selectors"].append("8ns")
+        if "MDIO" in text_u:
+            specs["timing_selectors"].append("200ns")
+        if "MII" in text_u:
+            specs["timing_selectors"].append("40ns")
+
+        specs["timing_selectors"] = sorted(set(specs["timing_selectors"]))
+        specs["interface_speeds"] = sorted(set(specs["interface_speeds"]))
+        return specs
+
+
+class PinMapChanMapAgent(_BaseAgent):
+    PINMAP_HEADER = "DTPinMap,version=2.1:platform=Jaguar"
+    CHANMAP_HEADER = "DTChanMap,version=2.4:platform=Jaguar"
+
+    STANDARD_GROUPS = [
+        "alldigpins",
+        "alldigcont",
+        "vddio_r_pins",
+        "vddio_m_pins",
+        "vddio_pins",
+        "xtal_pins",
+        "MDI_Pins",
+        "TX_Pins",
+        "RX_Pins",
+    ]
+
+    def generate_pinmap(self, pin_list: list[dict[str, Any]] | None = None) -> str:
+        template = self._read_export("Pinmap.txt")
+        if not template:
+            lines = [self.PINMAP_HEADER, "\tPin Name\tType\tComment"]
+            for row in pin_list or []:
+                lines.append(f"\t{row.get('pin_name', '')}\t{row.get('type', 'I/O')}\t{row.get('comment', '')}")
+            return "\n".join(lines) + "\n"
+
+        if pin_list:
+            header = [ln for ln in template.splitlines()[:2]]
+            body = [f"\t{r.get('pin_name', '')}\t{r.get('type', 'I/O')}\t{r.get('comment', '')}" for r in pin_list]
+            return "\n".join(header + body) + "\n"
+        return template
+
+    def generate_chanmap(self, package_pins: int, num_sites: int, pin_channel_map: dict[str, dict[str, str]] | None = None) -> str:
+        if pin_channel_map:
+            # When user provided channel map data, always render from it directly
+            # so requested site-count is honored even if template is 2-site.
+            cols = "\t".join([f"Site {i}" for i in range(num_sites)])
+            lines = [
+                f"{self.CHANMAP_HEADER}\tChannel Map",
+                "\tDevice Under Test\t\tTester Channel",
+                f"\tPin Name\tPackage Pin\tType\t{cols}\tComment",
+            ]
+            for pin, data in pin_channel_map.items():
+                site_vals = "\t".join(data.get(f"site{i}", "") for i in range(num_sites))
+                lines.append(
+                    f"\t{pin}\t{data.get('package_pin', '')}\t{data.get('type', 'I/O')}\t{site_vals}\t{data.get('comment', '')}"
+                )
+            return "\n".join(lines) + "\n"
+
+        template = self._read_export(f"ChanMap_pkg{package_pins}_eng.txt")
+        if not template:
+            cols = "\t".join([f"Site {i}" for i in range(num_sites)])
+            lines = [
+                f"{self.CHANMAP_HEADER}\tChannel Map",
+                "\tDevice Under Test\t\tTester Channel",
+                f"\tPin Name\tPackage Pin\tType\t{cols}\tComment",
+            ]
+            if pin_channel_map:
+                for pin, data in pin_channel_map.items():
+                    site_vals = "\t".join(data.get(f"site{i}", "") for i in range(num_sites))
+                    lines.append(f"\t{pin}\t\t{data.get('type', 'I/O')}\t{site_vals}\t")
+            return "\n".join(lines) + "\n"
+
+        if not pin_channel_map:
+            # Keep template content, but enforce requested site-count in header and rows.
+            lines = template.splitlines()
+            out = []
+            for ln in lines:
+                stripped = ln.strip()
+                if stripped.startswith("Pin Name") and "Site" in stripped:
+                    prefix = "\tPin Name\tPackage Pin\tType\t"
+                    out.append(prefix + "\t".join(f"Site {i}" for i in range(num_sites)) + "\tComment")
+                    continue
+
+                if not ln.startswith("\t") or ln.count("\t") < 5:
+                    out.append(ln)
+                    continue
+
+                cells = ln.split("\t")
+                pin = cells[1].strip() if len(cells) > 1 else ""
+                if not pin or pin.lower() in {"pin name", "device under test"}:
+                    out.append(ln)
+                    continue
+
+                package_pin = cells[2] if len(cells) > 2 else ""
+                pin_type = cells[3] if len(cells) > 3 else "I/O"
+                existing_sites = cells[4:-1] if len(cells) > 5 else []
+                comment = cells[-1] if len(cells) > 4 else ""
+                resized_sites = existing_sites[:num_sites] + [""] * max(0, num_sites - len(existing_sites))
+                out.append("\t".join(["", pin, package_pin, pin_type] + resized_sites + [comment]))
+            return "\n".join(out) + "\n"
+
+        lines = template.splitlines()
+        out = []
+        for ln in lines:
+            if ln.strip().startswith("Pin Name") and "Site" in ln:
+                prefix = "\tPin Name\tPackage Pin\tType\t"
+                out.append(prefix + "\t".join(f"Site {i}" for i in range(num_sites)) + "\tComment")
+                continue
+            if not ln.startswith("\t") or ln.count("\t") < 4:
+                out.append(ln)
+                continue
+
+            cells = ln.split("\t")
+            pin = cells[1].strip() if len(cells) > 1 else ""
+            if pin and pin in pin_channel_map:
+                row = pin_channel_map[pin]
+                base = ["", pin, row.get("package_pin", ""), row.get("type", "I/O")]
+                sites = [row.get(f"site{i}", "") for i in range(num_sites)]
+                out.append("\t".join(base + sites + [row.get("comment", "")]))
+            else:
+                out.append(ln)
+        return "\n".join(out) + "\n"
+
+
+class LevelsDCSpecsAgent(_BaseAgent):
+    LEVEL_SHEET_HEADER = "DTLevelSheet,version=2.1:platform=Jaguar"
+    DC_SPEC_HEADER = "DTDCSpecSheet,version=2.0:platform=Jaguar"
+
+    def generate_levels(self, package: str, vddio_domains: list[str]) -> str:
+        template = self._read_export(f"Levels_{package}.txt", f"Levels_{package.lower()}.txt")
+        if template:
+            return template
+        fallback = self._read_export("Levels_pkg40.txt", "Levels_pkg64.txt", "Levels_pkg32.txt")
+        if fallback:
+            return fallback
+        return (
+            f"{self.LEVEL_SHEET_HEADER}\tLevels\n"
+            "\tSelector\tVil\tVih\tVol\tVoh\tVcl\tVch\tDriverMode\n"
+            f"\tDefault\t0.1*{vddio_domains[0] if vddio_domains else 'VDDIO'}"
+            f"\t0.9*{vddio_domains[0] if vddio_domains else 'VDDIO'}\t0.5\t0.5\t-1\t6\tLargeswing-HiZ\n"
+        )
+
+    def generate_dc_specs(self, supply_voltages: dict[str, float]) -> str:
+        template = self._read_export("DC Specs.txt")
+        if template:
+            return template
+        lines = [f"{self.DC_SPEC_HEADER}\tDC Specs", "\tSelector\tSymbol\tValue"]
+        for rail, value in supply_voltages.items():
+            lines.append(f"\tDefault\t_{rail.lower()}\t{value}")
+        return "\n".join(lines) + "\n"
+
+    def get_char_conditions(self) -> list[dict[str, Any]]:
+        raw = self._read_export("charConds.txt")
+        if not raw:
+            return [
+                {"temp_c": -40, "avdd3p3": 2.97, "vdd0p9": 0.81},
+                {"temp_c": 25, "avdd3p3": 3.3, "vdd0p9": 0.9},
+                {"temp_c": 105, "avdd3p3": 3.63, "vdd0p9": 0.99},
+            ]
+
+        rows: list[dict[str, Any]] = []
+        for ln in raw.splitlines():
+            vals = re.findall(r"-?\d+\.?\d*", ln)
+            if len(vals) >= 3:
+                rows.append({
+                    "temp_c": float(vals[0]),
+                    "avdd3p3": float(vals[1]),
+                    "vdd0p9": float(vals[2]),
+                })
+        return rows
+
+
+class ACSpecsTimingAgent(_BaseAgent):
+    AC_SPEC_HEADER = "DTACSpecSheet,version=2.0:platform=Jaguar"
+
+    TIMING_SELECTORS = {
+        "1us": 1e-6,
+        "200ns": 200e-9,
+        "100ns": 100e-9,
+        "60ns": 60e-9,
+        "50ns": 50e-9,
+        "40ns": 40e-9,
+        "20ns": 20e-9,
+        "8ns": 8e-9,
+        "4ns": 4e-9,
+    }
+
+    def generate_ac_specs(self, device_speeds: list[str]) -> str:
+        template = self._read_export("AC Specs.txt")
+        if template:
+            return template
+        lines = [f"{self.AC_SPEC_HEADER}\tAC Specs", "\tSelector\tSymbol\tValue"]
+        for sel, val in self.TIMING_SELECTORS.items():
+            lines.append(f"\t{sel}\t_period\t{val}")
+        if device_speeds:
+            lines.append("\t# Device Speeds\t\t" + ", ".join(device_speeds))
+        return "\n".join(lines) + "\n"
+
+
+class PatternSetAgent(_BaseAgent):
+    PATSET_HEADER = "DTPatternSetSheet,version=2.2:platform=Jaguar"
+
+    def generate_patset(self, package: str, device_name: str) -> str:
+        pkg_num = re.sub(r"\D", "", package)
+        template = self._read_export(f"Patset_{pkg_num}pkg.txt", f"Patset_{package}.txt")
+        if template:
+            return template.replace("ADIN1300", device_name).replace("ADIN1301", device_name)
+        return f"{self.PATSET_HEADER}\tPattern Sets\n"
+
+    def validate_pat_files(self, base_path: str) -> list[str]:
+        base = Path(base_path)
+        missing: list[str] = []
+        patsets = list(self.context.exports_dir.glob("Patset_*.txt"))
+        pat_re = re.compile(r"([^\t\n\r]+\.PAT)", re.IGNORECASE)
+
+        for patset in patsets:
+            txt = _safe_read(patset)
+            for match in pat_re.findall(txt):
+                rel = match.replace("\\", os.sep).replace("/", os.sep).strip()
+                candidate = base / rel
+                if not candidate.exists():
+                    missing.append(str(candidate))
+        return missing
+
+
+class FlowTableAgent(_BaseAgent):
+    FLOW_HEADER = "DTFlowtableSheet,version=2.3:platform=Jaguar"
+
+    def generate_main_flow(self, job_name: str, is_char: bool) -> str:
+        template = self._read_export("Flow Table Char.txt" if is_char else "Flow Table.txt")
+        if template:
+            return template.replace("ADIN1300", job_name.split("_")[0]).replace("ADIN1301", job_name.split("_")[0])
+        return f"{self.FLOW_HEADER}\t{'Flow Table Char' if is_char else 'Flow Table'}\n"
+
+    def generate_subflow(self, subflow_name: str) -> str:
+        return self._read_export(f"Subflow_{subflow_name}.txt")
+
+    def add_test_step(
+        self,
+        tname: str,
+        tnum: int,
+        lo_lim: float,
+        hi_lim: float,
+        scale: str,
+        units: str,
+        pass_bin: int,
+        fail_bin: int,
+        gate: str = "",
+    ) -> str:
+        return (
+            f"\t{tnum}\t{tname}\t{gate}\t{lo_lim}\t{hi_lim}\t{scale}\t{units}"
+            f"\t{pass_bin}\t{fail_bin}"
+        )
+
+
+class TestInstancesVBTAgent(_BaseAgent):
+    _vbt_prompt = ChatPromptTemplate.from_messages([
+        (
+            "system",
+            (
+                "You are an expert UltraFlex IG-XL VBT developer. "
+                "Generate robust VB6-compatible .bas modules for Teradyne UltraFlex. "
+                "Use realistic IG-XL object model patterns, clear function boundaries, "
+                "error handling, and comments for setup/measure/bin decisions. "
+                "Return only VB code (no markdown fences)."
+            ),
+        ),
+        (
+            "user",
+            "Device: {device_name}\n"
+            "Required Test: {test_name}\n\n"
+            "Internal VBT Reference Context:\n{internal_context}\n\n"
+            "Optional Web Knowledge Snippets:\n{web_context}\n\n"
+            "Write a complete .bas module that includes:\n"
+            "1) Main entry Sub/Function for this test\n"
+            "2) Setup helper(s)\n"
+            "3) Measurement helper(s)\n"
+            "4) Limit/bin decision helper(s)\n"
+            "5) Safe cleanup path\n"
+            "Keep names specific to the requested test and target device."
+        ),
+    ])
+
+    def generate_test_instances(self, package: str, test_list: list[str]) -> str:
+        pkg_num = re.sub(r"\D", "", package)
+        template = self._read_export(
+            f"Test Instances_Power_{pkg_num}pkg.txt",
+            "Test_Instances_Common.txt",
+            "Test Instances_Power_40pkg.txt",
+            "Test Instances_Power_64pkg.txt",
+            "Test Instances_Power_32pkg.txt",
+        )
+        if template:
+            return template
+
+        lines = ["DTTestInstancesSheet,version=2.2:platform=Jaguar\tTest Instances"]
+        for idx, t in enumerate(test_list, start=1):
+            lines.append(f"\t{idx}\t{t}")
+        return "\n".join(lines) + "\n"
+
+    def generate_exec_ip(self, device_name: str) -> str:
+        template = self._read_export("Exec_IP_Module.bas")
+        if template:
+            return template.replace("ADIN1300", device_name).replace("ADIN1301", device_name)
+        return (
+            "Attribute VB_Name = \"Exec_IP_Module\"\n"
+            "Public Sub OnProgramLoaded()\n"
+            "    thehdw.DIB.powerOn = True\n"
+            "End Sub\n"
+        )
+
+    def generate_mdio_class(self, engine: str = "DSSC") -> str:
+        if engine.upper() == "PA":
+            template = self._read_export("MDIO_PA.cls")
+            if template:
+                return template
+        template = self._read_export("MDIO_DSSC.cls", "MDIO_test.bas")
+        return template or "' MDIO placeholder\n"
+
+    def generate_vbt_modules_bundle(self, device_name: str) -> dict[str, str]:
+        """Generate a broad VB bundle (.bas/.cls) from reference exports.
+
+        This allows pilot generation to include most code modules needed by IG-XL,
+        not just Exec_IP and MDIO helpers.
+        """
+        vb_bundle: dict[str, str] = {}
+
+        preferred = [
+            "Exec_IP_Module.bas",
+            "RunVBT.bas",
+            "MDIO_test.bas",
+            "MDIO_DSSC.cls",
+            "MDIO_PA.cls",
+            "Exec_IP_Module.bas",
+            "Globals.bas",
+            "DSP_Module.bas",
+            "BoxHelper.bas",
+        ]
+
+        # Load preferred modules first (preserve order, no duplicates)
+        seen: set[str] = set()
+        for name in preferred:
+            p = self.context.exports_dir / name
+            if not p.exists() or name in seen:
+                continue
+            seen.add(name)
+            text = _safe_read(p)
+            if text:
+                vb_bundle[name] = self._retarget_device_names(text, device_name)
+
+        # Then include all other VB modules from Exports
+        for ext in ("*.bas", "*.cls"):
+            for p in sorted(self.context.exports_dir.glob(ext)):
+                name = p.name
+                if name in seen:
+                    continue
+                text = _safe_read(p)
+                if not text:
+                    continue
+                seen.add(name)
+                vb_bundle[name] = self._retarget_device_names(text, device_name)
+
+        # Fallback minimal module if no reference modules were found
+        if not vb_bundle:
+            vb_bundle["Exec_IP_Module.bas"] = self.generate_exec_ip(device_name)
+
+        return vb_bundle
+
+    def generate_custom_test_bas_modules(
+        self,
+        device_name: str,
+        required_tests: list[str],
+        use_web_knowledge: bool = True,
+    ) -> dict[str, str]:
+        """Generate BAS modules for requested tests using internal + optional web knowledge."""
+        tests = [t.strip() for t in required_tests if t and t.strip()]
+        if not tests:
+            return {}
+
+        internal_context = self._build_internal_vbt_context()
+        web_context_map = self._fetch_web_vbt_context(tests) if use_web_knowledge else {}
+
+        out: dict[str, str] = {}
+        for test_name in tests:
+            try:
+                chain = self._vbt_prompt | get_chat_llm(OPENAI_WEB_MODEL, temperature=0.1) | StrOutputParser()
+                generated = chain.invoke(
+                    {
+                        "device_name": device_name,
+                        "test_name": test_name,
+                        "internal_context": internal_context,
+                        "web_context": web_context_map.get(test_name, "(none)"),
+                    }
+                )
+                code = self._strip_code_fences(generated).strip()
+                if not code:
+                    code = self._fallback_test_module(device_name, test_name)
+            except Exception:
+                code = self._fallback_test_module(device_name, test_name)
+
+            mod_name = f"Auto_{self._sanitize_module_name(test_name)}.bas"
+            out[mod_name] = code + ("\n" if not code.endswith("\n") else "")
+
+        return out
+
+    def _build_internal_vbt_context(self, max_chars: int = 24000) -> str:
+        chunks: list[str] = []
+        for ext in ("*.bas", "*.cls"):
+            for p in sorted(self.context.exports_dir.glob(ext)):
+                txt = _safe_read(p)
+                if not txt:
+                    continue
+                chunks.append(f"===== {p.name} =====\n{txt[:4000]}")
+                joined = "\n\n".join(chunks)
+                if len(joined) >= max_chars:
+                    return joined[:max_chars]
+        return "\n\n".join(chunks)[:max_chars]
+
+    @staticmethod
+    def _fetch_web_vbt_context(required_tests: list[str], per_test: int = 3) -> dict[str, str]:
+        try:
+            from ddgs import DDGS
+        except Exception:
+            return {t: "" for t in required_tests}
+
+        out: dict[str, str] = {}
+        with DDGS() as ddgs:
+            for test in required_tests:
+                snippets: list[str] = []
+                q = f"Teradyne UltraFlex IG-XL VBT Visual Basic {test}"
+                try:
+                    rows = ddgs.text(q, max_results=per_test)
+                except TypeError:
+                    rows = ddgs.text(q)
+                except Exception:
+                    rows = []
+
+                for row in (rows or [])[:per_test]:
+                    title = str(row.get("title") or "").strip()
+                    body = str(row.get("body") or "").strip()
+                    href = str(row.get("href") or "").strip()
+                    snippets.append(f"- {title}\n  {body}\n  {href}")
+
+                out[test] = "\n".join(snippets)
+        return out
+
+    @staticmethod
+    def _strip_code_fences(text: str) -> str:
+        t = text.strip()
+        if t.startswith("```"):
+            t = re.sub(r"^```[a-zA-Z0-9_\-]*\n", "", t)
+            t = re.sub(r"\n```$", "", t)
+        return t
+
+    @staticmethod
+    def _sanitize_module_name(name: str) -> str:
+        cleaned = re.sub(r"[^A-Za-z0-9_]+", "_", name.strip())
+        cleaned = re.sub(r"_+", "_", cleaned).strip("_")
+        return cleaned or "GeneratedTest"
+
+    @staticmethod
+    def _fallback_test_module(device_name: str, test_name: str) -> str:
+        mod = TestInstancesVBTAgent._sanitize_module_name(test_name)
+        return (
+            f"Attribute VB_Name = \"Auto_{mod}\"\n"
+            "Option Explicit\n\n"
+            f"Public Function {mod}_Run() As Long\n"
+            "    On Error GoTo EH\n"
+            f"    ' TODO: implement {test_name} logic for {device_name}\n"
+            f"    {mod}_Setup\n"
+            f"    {mod}_Measure\n"
+            f"    {mod}_Evaluate\n"
+            f"    {mod}_Run = 1\n"
+            "    Exit Function\n"
+            "EH:\n"
+            f"    {mod}_Run = 0\n"
+            "End Function\n\n"
+            f"Private Sub {mod}_Setup()\n"
+            "End Sub\n\n"
+            f"Private Sub {mod}_Measure()\n"
+            "End Sub\n\n"
+            f"Private Sub {mod}_Evaluate()\n"
+            "End Sub\n"
+        )
+
+    @staticmethod
+    def _retarget_device_names(text: str, device_name: str) -> str:
+        """Retarget common reference device names to the target device."""
+        return (
+            text.replace("ADIN1300", device_name)
+            .replace("ADIN1301", device_name)
+            .replace("ADIN1200", device_name)
+        )
+
+
+class JobListAgent(_BaseAgent):
+    JOB_LIST_HEADER = "DTJobListSheet,version=2.5:platform=Jaguar"
+
+    def generate_job_list(self, jobs: list[dict[str, Any]]) -> str:
+        template = self._read_export("Job List.txt")
+        if not jobs:
+            return template or f"{self.JOB_LIST_HEADER}\tJob List\n"
+
+        if template:
+            lines = template.splitlines()
+            kept = [ln for ln in lines if not re.search(r"\t(ADIN|adin)\d+", ln)]
+            for row in jobs:
+                pkg_num = re.sub(r"\D", "", str(row.get("package", "40")))
+                ti = f"Common+Power_{pkg_num}pkg+Func"
+                flow = row.get("flow", "Flow Table Char" if row.get("is_char") else "Flow Table")
+                kept.append(
+                    f"\t{row['name']}\tPinmap\t{ti}\t{flow}\tAC Specs\tDC Specs\tPatset_{pkg_num}pkg"
+                )
+            return "\n".join(kept) + "\n"
+
+        out = [f"{self.JOB_LIST_HEADER}\tJob List"]
+        out.append("\tJob Name\tPin Map\tTest Instances\tFlow Table\tAC\tDC\tPattern Sets")
+        for row in jobs:
+            pkg_num = re.sub(r"\D", "", str(row.get("package", "40")))
+            ti = f"Common+Power_{pkg_num}pkg+Func"
+            flow = row.get("flow", "Flow Table Char" if row.get("is_char") else "Flow Table")
+            out.append(
+                f"\t{row['name']}\tPinmap\t{ti}\t{flow}\tAC Specs\tDC Specs\tPatset_{pkg_num}pkg"
+            )
+        return "\n".join(out) + "\n"
+
+
+class DatalogAnalyzerAgent(_BaseAgent):
+    _MEAS_RE = re.compile(
+        r"(?P<test>[A-Za-z0-9_\-]+).*?(?P<pin>[A-Za-z0-9_\-]+).*?(?P<value>-?\d+\.?\d*)\s*(?P<unit>V|A|mV|uA)?",
+        re.IGNORECASE,
+    )
+
+    def parse_datalog(self, filepath: str) -> dict[str, Any]:
+        text = _safe_read(Path(filepath))
+        rows = []
+        for ln in text.splitlines():
+            m = self._MEAS_RE.search(ln)
+            if not m:
+                continue
+            value = float(m.group("value"))
+            rows.append(
+                {
+                    "test_name": m.group("test"),
+                    "pin_name": m.group("pin"),
+                    "value": value,
+                    "unit": m.group("unit") or "",
+                    "is_fail": "(F)" in ln or " FAIL" in ln.upper(),
+                    "raw": ln,
+                }
+            )
+        return {"file": filepath, "rows": rows}
+
+    def extract_statistics(self, datalog_dir: str) -> dict[str, dict[str, dict[str, float]]]:
+        grouped: dict[str, dict[str, list[float]]] = defaultdict(lambda: defaultdict(list))
+        failures: dict[str, dict[str, int]] = defaultdict(lambda: defaultdict(int))
+
+        for fp in Path(datalog_dir).glob("*_CHAR_*.txt"):
+            parsed = self.parse_datalog(str(fp))
+            for row in parsed["rows"]:
+                t = row["test_name"]
+                p = row["pin_name"]
+                grouped[t][p].append(float(row["value"]))
+                if row["is_fail"]:
+                    failures[t][p] += 1
+
+        stats: dict[str, dict[str, dict[str, float]]] = {}
+        for test, pins in grouped.items():
+            stats[test] = {}
+            for pin, values in pins.items():
+                sigma = pstdev(values) if len(values) > 1 else 0.0
+                stats[test][pin] = {
+                    "min": min(values),
+                    "max": max(values),
+                    "mean": mean(values),
+                    "sigma": sigma,
+                    "n_samples": float(len(values)),
+                    "n_failures": float(failures[test][pin]),
+                }
+        return stats
+
+    def recommend_limits(self, stats: dict[str, dict[str, dict[str, float]]], sigma_guard: float = 6.0) -> dict[str, dict[str, dict[str, float]]]:
+        out: dict[str, dict[str, dict[str, float]]] = {}
+        for test, pins in stats.items():
+            out[test] = {}
+            for pin, s in pins.items():
+                lo = s["mean"] - sigma_guard * s["sigma"]
+                hi = s["mean"] + sigma_guard * s["sigma"]
+                out[test][pin] = {
+                    "recommended_lo": min(lo, s["min"]),
+                    "recommended_hi": max(hi, s["max"]),
+                }
+        return out
+
+    def detect_hardware_failures(self, datalog_dir: str) -> list[dict[str, Any]]:
+        findings: list[dict[str, Any]] = []
+        for fp in Path(datalog_dir).glob("*_CHAR_*.txt"):
+            parsed = self.parse_datalog(str(fp))
+            ov = [r for r in parsed["rows"] if r["value"] > 2.0 and "V" in r["unit"]]
+            nz = [r for r in parsed["rows"] if r["value"] < 0.1 and "V" in r["unit"]]
+            if ov or nz:
+                findings.append(
+                    {
+                        "file": str(fp),
+                        "overvoltage_count": len(ov),
+                        "near_zero_count": len(nz),
+                        "examples": (ov[:3] + nz[:3]),
+                    }
+                )
+        return findings
+
+
+def write_generated_files(output_dir: Path, files: dict[str, str]) -> None:
+    for name, content in files.items():
+        _write(output_dir / name, content)

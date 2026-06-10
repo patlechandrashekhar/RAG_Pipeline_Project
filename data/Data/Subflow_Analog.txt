@@ -1,0 +1,75 @@
+DTFlowtableSheet,version=2.3:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Flow Table																																					
+						Flow Domain:																																
+			Gate			Command				Limits		Datalog Display Results			Bin Number		Sort Number			Action			Group				Device			Debug		CT Profile Data						
+	Label	Enable	Job	Part	Env	Opcode	Parameter	TName	TNum	LoLim	HiLim	Scale	Units	Format	Pass	Fail	Pass	Fail	Result	Pass	Fail	State	Specifier	Sense	Condition	Name	Sense	Condition	Name	Assume	Sites	Elapsed Time (s)	Background Type	Serialize	Resource Lock	Flow Step Locked	Comment	
+			!ADIN1200_A0, !ADIN1200_A0_CHAR			Test	VOD_1000BaseT																															
+						Use-Limit	VOD_1000BaseT	VOD_ZS_1000BT					V			8		10	Fail																			
+						Use-Limit	VOD_1000BaseT	VOD_NFS_1000BT					V			8		10	Fail																			
+						Use-Limit	VOD_1000BaseT	VOD_PFS_1000BT					V			8		10	Fail																			
+						Use-Limit	VOD_1000BaseT	VOD_ZS_1000BT_Diff		-0.01	0.01		V			8		10	Fail																			
+						Use-Limit	VOD_1000BaseT	VOD_NFS_1000BT_Diff		-1.03	-0.97		V			8		10	Fail																			
+						Use-Limit	VOD_1000BaseT	VOD_PFS_1000BT_Diff		0.97	1.03		V			8		10	Fail																			
+						Test	VOD_100BaseT																															
+						Use-Limit	VOD_100BaseT	VOD_ZS_100BT					V			8		10	Fail																			
+						Use-Limit	VOD_100BaseT	VOD_NFS_100BT					V			8		10	Fail																			
+						Use-Limit	VOD_100BaseT	VOD_PFS_100BT					V			8		10	Fail																			
+						Use-Limit	VOD_100BaseT	VOD_ZS_100BT_Diff		-0.01	0.01		V			8		10	Fail																			
+						Use-Limit	VOD_100BaseT	VOD_NFS_100BT_Diff		-1.03	-0.97		V			8		10	Fail																			
+						Use-Limit	VOD_100BaseT	VOD_PFS_100BT_Diff		0.97	1.03		V			8		10	Fail																			
+						Test	VOD_10BaseT																															
+						Use-Limit	VOD_10BaseT	VOD_ZS_10BT					V			8		10	Fail																			
+						Use-Limit	VOD_10BaseT	VOD_ZS_10BT					V			8		10	Fail																			
+						Use-Limit	VOD_10BaseT	VOD_NFS_10BT					V			8		10	Fail																			
+						Use-Limit	VOD_10BaseT	VOD_NFS_10BT					V			8		10	Fail																			
+						Use-Limit	VOD_10BaseT	VOD_PFS_10BT					V			8		10	Fail																			
+						Use-Limit	VOD_10BaseT	VOD_PFS_10BT					V			8		10	Fail																			
+						Use-Limit	VOD_10BaseT	VOD_ZS_10BTe_Diff		-0.01	0.01		V			8		10	Fail																			
+						Use-Limit	VOD_10BaseT	VOD_NFS_10BTe_Diff		-1.9	-1.6		V			8		10	Fail																			
+						Use-Limit	VOD_10BaseT	VOD_PFS_10BTe_Diff		1.6	1.9		V			8		10	Fail																			
+			!ADIN1200_A0, !ADIN1200_A0_CHAR			Test	ABIST_Test																															
+						Use-Limit	ABIST_Test	BIST_Status		253	253	No		%#x		8		10	Fail																			
+						Use-Limit	ABIST_Test	BIST_Status_10BaseTe		9	9	No		%#x		8		10	Fail																			
+						Test	ADC_DC_Offset																															
+						Use-Limit	ADC_DC_Offset	DcOffOldDim0		-15	15	No				8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	DcOffNewDim0		-15	15	No				8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	DcOffOldDim1		-15	15	No				8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	DcOffNewDim1		-15	15	No				8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim0_DC_Offs_Min		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim0_DC_Offs_Mean		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim0_DC_Offs_Max		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim0_DC_Offs_Min		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim0_DC_Offs_Mean		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim0_DC_Offs_Max		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim1_DC_Offs_Min		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim1_DC_Offs_Mean		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim1_DC_Offs_Max		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim1_DC_Offs_Min		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim1_DC_Offs_Mean		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim1_DC_Offs_Max		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	DcOffOldDim2		-15	15	No				8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	DcOffNewDim2		-15	15	No				8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	DcOffOldDim3		-15	15	No				8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	DcOffNewDim3		-15	15	No				8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim2_DC_Offs_Min		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim2_DC_Offs_Mean		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim2_DC_Offs_Max		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim2_DC_Offs_Min		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim2_DC_Offs_Mean		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim2_DC_Offs_Max		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim3_DC_Offs_Min		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim3_DC_Offs_Mean		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	Old_Dim3_DC_Offs_Max		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim3_DC_Offs_Min		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim3_DC_Offs_Mean		-6.5	6.5	No	LSB			8		10	Fail																			
+						Use-Limit	ADC_DC_Offset	New_Dim3_DC_Offs_Max		-6.5	6.5	No	LSB			8		10	Fail																			
+			ADIN1200_A0			Test	Phase_Sel																															
+						Use-Limit	Phase_Sel	Symmetry (New ADC)		-80	-35	No	dB			8		10	Fail																			
+						Use-Limit	Phase_Sel	Symmetry (Old ADC)		-80	-35	No	dB			8		10	Fail																			
+						Use-Limit	Phase_Sel	Delay		3.875	4.125	No	nSec			8		10	Fail																			
+						Use-Limit	Phase_Sel	Rising Steps (New ADC)		60	256	No				8		10	Fail																			
+						Use-Limit	Phase_Sel	Rising Steps (Old ADC)		60	256	No				8		10	Fail																			
+						Use-Limit	Phase_Sel	adc_new_edge_diffs (min)		0		m	V			8		10	Fail																			
+						Use-Limit	Phase_Sel	adc_new_edge_diffs (max)		0		m	V			8		10	Fail																			
+						Use-Limit	Phase_Sel	adc_old_edge_diffs (min)		0		m	V			8		10	Fail																			
+						Use-Limit	Phase_Sel	adc_old_edge_diffs (max)		0		m	V			8		10	Fail																			
+						return																																

@@ -1,0 +1,14 @@
+DTFlowtableSheet,version=2.3:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Flow Table																																					
+						Flow Domain:																																
+			Gate			Command				Limits		Datalog Display Results			Bin Number		Sort Number			Action			Group				Device			Debug		CT Profile Data						
+	Label	Enable	Job	Part	Env	Opcode	Parameter	TName	TNum	LoLim	HiLim	Scale	Units	Format	Pass	Fail	Pass	Fail	Result	Pass	Fail	State	Specifier	Sense	Condition	Name	Sense	Condition	Name	Assume	Sites	Elapsed Time (s)	Background Type	Serialize	Resource Lock	Flow Step Locked	Comment	
+						Test	COND_Zero												None																			
+						Test	Socket_IO_Leakage									5		5	Fail																			
+						Test	Socket_Power_Shorts									5		5	Fail																			
+						Test	Relay_12V_Check									5		5	Fail																			
+						Test	Relay_5V_Check									5		5	Fail																			
+						Test	Res_Measurement									5		5	Fail																			
+						Test	DIB_HSD_Trace									5		5	Fail																			
+						set-device									1		1		Pass																			
+						stop																																
+						return																																

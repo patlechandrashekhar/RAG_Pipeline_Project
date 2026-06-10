@@ -1,0 +1,129 @@
+DTLevelSheet,version=2.1:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Pin Levels					
+						
+	Pin/Group	Seq.	Parameter	Value	Comment	
+	AVDD3P3		Vps	=_avdd3p3		
+	AVDD3P3		Isc	1		
+	AVDD3P3		Tdelay	0.001		
+	VDDIO_R		Vps	=_vddio_r		
+	VDDIO_R		Isc	1		
+	VDDIO_R		Tdelay	0.001		
+	alldigpins		Vil	=_vddio_r * 0.1		
+	alldigpins		Vih	=_vddio_r * 0.9		
+	alldigpins		Vol	=_vddio_r * 0.5		
+	alldigpins		Voh	=_vddio_r * 0.5		
+	alldigpins		Iol	0		
+	alldigpins		Ioh	0		
+	alldigpins		Vt	0		
+	alldigpins		Vcl	=_Vcl_default		
+	alldigpins		Vch	=_Vch_default		
+	alldigpins		VoutLoTyp	0		
+	alldigpins		VoutHiTyp	0		
+	alldigpins		DriverMode	Largeswing-HiZ		
+	vddio_r_pins		Vil	=_vddio_r * 0.1		
+	vddio_r_pins		Vih	=_vddio_r * 0.9		
+	vddio_r_pins		Vol	=_vddio_r * 0.5		
+	vddio_r_pins		Voh	=_vddio_r * 0.5		
+	vddio_r_pins		Iol	0		
+	vddio_r_pins		Ioh	0		
+	vddio_r_pins		Vt	0		
+	vddio_r_pins		Vcl	=_Vcl_default		
+	vddio_r_pins		Vch	=_Vch_default		
+	vddio_r_pins		VoutLoTyp	0		
+	vddio_r_pins		VoutHiTyp	0		
+	vddio_r_pins		DriverMode	Largeswing-HiZ		
+	vddio_m_pins		Vil	=_vddio_r * 0.1		
+	vddio_m_pins		Vih	=_vddio_r * 0.9		
+	vddio_m_pins		Vol	=_vddio_r * 0.5		
+	vddio_m_pins		Voh	=_vddio_r * 0.5		
+	vddio_m_pins		Iol	0		
+	vddio_m_pins		Ioh	0		
+	vddio_m_pins		Vt	0		
+	vddio_m_pins		Vcl	=_Vcl_default		
+	vddio_m_pins		Vch	=_Vch_default		
+	vddio_m_pins		VoutLoTyp	0		
+	vddio_m_pins		VoutHiTyp	0		
+	vddio_m_pins		DriverMode	Largeswing-HiZ		
+	vddio_pins		Vil	=_avdd3p3 * 0.1		
+	vddio_pins		Vih	=_avdd3p3 * 0.9		
+	vddio_pins		Vol	=_avdd3p3 * 0.5		
+	vddio_pins		Voh	=_avdd3p3 * 0.5		
+	vddio_pins		Iol	0		
+	vddio_pins		Ioh	0		
+	vddio_pins		Vt	0		
+	vddio_pins		Vcl	=_Vcl_default		
+	vddio_pins		Vch	=_Vch_default		
+	vddio_pins		VoutLoTyp	0		
+	vddio_pins		VoutHiTyp	0		
+	vddio_pins		DriverMode	Largeswing-HiZ		
+	xtal_pins		Vil	=_avdd3p3 * 0.1		
+	xtal_pins		Vih	=_avdd3p3 * 0.9		
+	xtal_pins		Vol	=_avdd3p3 * 0.5		
+	xtal_pins		Voh	=_avdd3p3 * 0.5		
+	xtal_pins		Iol	0		
+	xtal_pins		Ioh	0		
+	xtal_pins		Vt	0		
+	xtal_pins		Vcl	=_Vcl_default		
+	xtal_pins		Vch	=_Vch_default		
+	xtal_pins		VoutLoTyp	0		
+	xtal_pins		VoutHiTyp	0		
+	xtal_pins		DriverMode	Largeswing-HiZ		
+	MDIO		Vil	=_vddio_m * 0.1		
+	MDIO		Vih	=_vddio_m		
+	MDIO		Vol	=_vddio_m * 0.8		
+	MDIO		Voh	=_vddio_m * 0.8		
+	MDIO		Iol	= 0		
+	MDIO		Ioh	0		
+	MDIO		Vt	= _vddio_m		
+	MDIO		Vcl	=_Vcl_default		
+	MDIO		Vch	=_Vch_default		
+	MDIO		VoutLoTyp	0		
+	MDIO		VoutHiTyp	0		
+	MDIO		DriverMode	VT		
+	GP_OUT		Vil	=_vddio_r * 0.05	MLS Level	
+	GP_OUT		Vih	=_vddio_r * 0.95	MLS Level	
+	GP_OUT		Vol	=_vddio_r * 0.5		
+	GP_OUT		Voh	=_vddio_r * 0.5		
+	GP_OUT		Iol	0		
+	GP_OUT		Ioh	0		
+	GP_OUT		Vt	0		
+	GP_OUT		Vcl	=_Vcl_default		
+	GP_OUT		Vch	=_Vch_default		
+	GP_OUT		VoutLoTyp	0		
+	GP_OUT		VoutHiTyp	0		
+	GP_OUT		DriverMode	Largeswing-HiZ		
+	LED_0		Vil	=_avdd3p3 * 0.05	MLS Level	
+	LED_0		Vih	=_avdd3p3 * 0.95	MLS Level	
+	LED_0		Vol	=_avdd3p3 * 0.5		
+	LED_0		Voh	=_avdd3p3 * 0.5		
+	LED_0		Iol	0		
+	LED_0		Ioh	0		
+	LED_0		Vt	0		
+	LED_0		Vcl	=_Vcl_default		
+	LED_0		Vch	=_Vch_default		
+	LED_0		VoutLoTyp	0		
+	LED_0		VoutHiTyp	0		
+	LED_0		DriverMode	Largeswing-HiZ		
+	GP_CLK		Vil	=_vddio_r * 0.05	MLS Level	
+	GP_CLK		Vih	=_vddio_r * 0.95	MLS Level	
+	GP_CLK		Vol	=_vddio_r * 0.5		
+	GP_CLK		Voh	=_vddio_r * 0.5		
+	GP_CLK		Iol	0		
+	GP_CLK		Ioh	0		
+	GP_CLK		Vt	0		
+	GP_CLK		Vcl	=_Vcl_default		
+	GP_CLK		Vch	=_Vch_default		
+	GP_CLK		VoutLoTyp	0		
+	GP_CLK		VoutHiTyp	0		
+	GP_CLK		DriverMode	Largeswing-HiZ		
+	MDIO_PULLUP_V		Vil	=_vddio_r * 0.6		
+	MDIO_PULLUP_V		Vih	=_vddio_r	High state for pullup voltage	
+	MDIO_PULLUP_V		Vol	=_vddio_r * 0.5		
+	MDIO_PULLUP_V		Voh	=_vddio_r * 0.5		
+	MDIO_PULLUP_V		Iol	0		
+	MDIO_PULLUP_V		Ioh	0		
+	MDIO_PULLUP_V		Vt	= _vddio_r		
+	MDIO_PULLUP_V		Vcl	=_Vcl_default		
+	MDIO_PULLUP_V		Vch	=_Vch_default		
+	MDIO_PULLUP_V		VoutLoTyp	0		
+	MDIO_PULLUP_V		VoutHiTyp	0		
+	MDIO_PULLUP_V		DriverMode	VT		

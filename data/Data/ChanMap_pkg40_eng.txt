@@ -1,0 +1,99 @@
+DTChanMap,version=2.4:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Channel Map									
+										
+	DIB ID:			View Mode:	Signal		Site Replication:		USL Tag:	
+										
+	Device Under Test		Tester Channel							
+	Pin Name	Package Pin	Type	Site 0	Site 1	Comment				
+	GP_CLK		I/O	8.ad418	8.b306					
+	GP_OUT		I/O	8.ab420	8.d304					
+	LED_0		I/O	8.ad420	8.b302					
+	LED_1		N/C	8.ch9	8.ch137					
+	LED_2		N/C	8.ch10	8.ch138					
+	MDC		I/O	8.ad404	8.b320					
+	MDIO		I/O	8.ad402	8.b322					
+	INT_N		I/O	8.ad406	8.b318					
+	RESET_N		I/O	8.ad408	8.b316					
+	REF_CLK		I/O	8.d404	8.ab320					
+	REXT		I/O	8.r414	8.n310					
+	TEST_EN		I/O	8.r418	8.n306					
+	MDI_0_N		I/O	8.z420	8.f304					
+	MDI_0_P		I/O	8.z422	8.f302					
+	MDI_1_N		I/O	8.x420	8.h304					
+	MDI_1_P		I/O	8.x422	8.h302					
+	MDI_2_N		I/O	8.t420	8.k304					
+	MDI_2_P		I/O	8.t422	8.k302					
+	MDI_3_N		I/O	8.r420	8.n304					
+	MDI_3_P		I/O	8.r422	8.n302					
+	COL		N/C	8.ch80	8.ch208					
+	CRS		N/C	8.ch81	8.ch209					
+	RXD_0		I/O	8.n404	8.r320					
+	RXD_1		I/O	8.n402	8.r322					
+	RXD_2		I/O	8.k410	8.t314					
+	RXD_3		I/O	8.k408	8.t316					
+	RXD_4		N/C	8.ch86	8.ch214					
+	RXD_5		N/C	8.ch87	8.ch215					
+	RXD_6		N/C	8.ch88	8.ch216					
+	RXD_7		N/C	8.ch89	8.ch217					
+	RX_CLK		I/O	8.h402	8.x322					
+	RX_CTL		I/O	8.h404	8.x320					
+	RX_ER		N/C	8.ch92	8.ch220					
+	TXD_0		I/O	8.k402	8.t322					
+	TXD_1		I/O	8.h408	8.x316					
+	TXD_2		I/O	8.h406	8.x318					
+	TXD_3		I/O	8.b422	8.ad302					
+	TXD_4		N/C	8.ch97	8.ch225					
+	TXD_5		N/C	8.ch98	8.ch226					
+	TXD_6		N/C	8.ch99	8.ch227					
+	TXD_7		N/C	8.ch100	8.ch228					
+	TX_CLK		N/C	8.ch127	8.ch255					
+	TX_CTL		I/O	8.d418	8.ab306					
+	TX_ER		N/C	8.ch102	8.ch230					
+	GTX_CLK		I/O	8.d414	8.ab310					
+	XTAL_O		I/O	8.b402	8.ad322					
+	XTAL_I		I/O	8.b404	8.ad320					
+	TDI		N/C	8.ch60	8.ch188					
+	TMS		N/C	8.ch61	8.ch189					
+	TDO		N/C	8.ch62	8.ch190					
+	TCK		N/C	8.ch63	8.ch191					
+	INT_N_PULLUP_V		I/O	8.n416	8.r308					
+	MDIO_PULLUP_V		I/O	8.n414	8.r310					
+	ULTRAPAC_CAP_P		N/C	0.b405	0.a304	UltraCapture				
+	ULTRAPAC_CAP_N		N/C	0.b404	0.a303	UltraCapture				
+	ULTRAPAC_SRC_P		N/C	0.b413	0.a310	UltraSource				
+	ULTRAPAC_SRC_N		N/C	0.b412	0.a309	UltraSource				
+	VDD0P9		DCVI	6.j402.f408	6.k302.f308					
+	AVDD3P3		DCVI	6.a403.f408	6.r302.f308					
+	VDDIO_M		N/C	6.sense5.dgs1	6.sense25.dgs3					
+	VDDIO_R		DCVI	6.h408.f408	6.a203.f308					
+	AVDD1P2		N/C	6.sense9.dgs1	6.sense29.dgs3					
+	VDDIO		N/C	6.sense11.dgs2	6.sense31.dgs4					
+	P5V_RLYCHK		DCVI	6.k307.f408	site0					
+	P12V_RLYCHK		DCVI	6.e302.f408	site0					
+	UTIL_K1		Utility	24.j204	24.j209					
+	UTIL_K2		Utility	24.m204	24.p209					
+	UTIL_K3		Utility	24.e202	24.h207					
+	UTIL_K4		Utility	24.p202	24.e207					
+	UTIL_KA1		Utility	24.m202	24.f207					
+	UTIL_KA2		Utility	24.f202	24.j207					
+	UTIL_KA3		Utility	24.n202	24.s207					
+	UTIL_KA4		Utility	24.g202	24.t204					
+	UTIL_KB1		Utility	24.w204	24.r209					
+	UTIL_KB2		Utility	24.f204	24.m209					
+	UTIL_KB3		Utility	24.w211	24.s209					
+	UTIL_KB4		Utility	24.k202	24.m207					
+	UTIL_KC1		Utility	24.w202	24.t207					
+	UTIL_KC2		Utility	24.h202	24.n207					
+	UTIL_KD1		Utility	24.s202	24.g209					
+	UTIL_KE1		Utility	24.j202	24.r207					
+	UTIL_KR1		Utility	24.k207	24.h211					
+	UTIL_KR2		Utility	24.g207	24.n211					
+	UTIL_KR3		Utility	24.k204	24.j211					
+	UTIL_KR4		Utility	24.p204	24.p211					
+	UTIL_KR5		N/C	24.util20	24.util52					
+	UTIL_KR6		N/C	24.util21	24.util53					
+	UTIL_KR7		N/C	24.util22	24.util54					
+	UTIL_KR8		N/C	24.util23	24.util55					
+	UTIL_KR9		Utility	24.w207	24.e211					
+	UTIL_KR10		N/C	24.util25	24.util57					
+	UTIL_KR11		Utility	24.t209	24.f211					
+	UTIL_KR12		N/C	24.util27	24.util59					

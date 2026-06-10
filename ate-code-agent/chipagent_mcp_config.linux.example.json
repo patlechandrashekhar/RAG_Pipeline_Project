@@ -1,0 +1,19 @@
+{
+  "mcpServers": {
+    "ultraflex-rag": {
+      "command": "/opt/page_indexing_RAG/.venv/bin/python",
+      "args": [
+        "/opt/page_indexing_RAG/ate-code-agent/rag_mcp_server.py"
+      ],
+      "env": {
+        "PYTHONHTTPSVERIFY": "0",
+        "CURL_CA_BUNDLE": "",
+        "REQUESTS_CA_BUNDLE": "",
+        "ULTRAFLEX_MCP_VECTOR_ONLY": "true",
+        "ULTRAFLEX_MCP_CACHE_TTL": "300",
+        "ULTRAFLEX_MCP_FAST_N_PER_QUERY": "2",
+        "CHROMA_PATH": "/mnt/shared/chroma/chroma_persistent_storage"
+      }
+    }
+  }
+}

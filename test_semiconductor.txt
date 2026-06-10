@@ -1,0 +1,5 @@
+
+    The ADuCM410 is a mixed-signal microcontroller from Analog Devices.
+    It includes SPI, I2C, and UART interfaces.
+    Operating voltage ranges from 1.8V to 3.6V.
+    

@@ -1,0 +1,11 @@
+DTPatternSetSheet,version=2.2:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Pattern Sets									
+										
+	Pattern Set	TD Group	Time Domain	Enable	File/Group Name	Burst	Start Label	Stop Label	Comment	
+	GePhy_Static_Comp_Scan				.\Patterns\DFT\A0\pkgnon64\GePhy_Static_Comp_Scan.PAT	yes				
+	GePhy_Static_Comp_Logic				.\Patterns\DFT\A0\pkgnon64\GePhy_Static_Comp_Logic.PAT	yes				
+	GePhy_Dynamic_Comp_Scan				.\Patterns\DFT\A0\pkgnon64\GePhy_Dynamic_Comp_Scan.PAT	yes				
+	GePhy_Dynamic_Comp_Logic				.\Patterns\DFT\A0\pkgnon64\GePhy_Dynamic_Comp_Logic.PAT	yes				
+	ROC_Static_FS_Scan				.\Patterns\DFT\A0\pkgnon64\ROC_Static_FS_Scan.PAT	yes				
+	ROC_Static_FS_Logic				.\Patterns\DFT\A0\pkgnon64\ROC_Static_FS_Logic.PAT	yes				
+	GePhy_IDDQ				.\Patterns\DFT\A0\pkgnon64\GePhy_IDDQ_Comp_Static_Logic.PAT	yes				
+	Boundary_Scan				.\Patterns\DFT\A0\pkgnon64\adin1300_bscan_jtag_non64_final_40ns_rz.PAT	yes				

@@ -1,0 +1,192 @@
+DTFlowtableSheet,version=2.3:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Flow Table																																					
+						Flow Domain:																																
+			Gate			Command				Limits		Datalog Display Results			Bin Number		Sort Number			Action			Group				Device			Debug		CT Profile Data						
+	Label	Enable	Job	Part	Env	Opcode	Parameter	TName	TNum	LoLim	HiLim	Scale	Units	Format	Pass	Fail	Pass	Fail	Result	Pass	Fail	State	Specifier	Sense	Condition	Name	Sense	Condition	Name	Assume	Sites	Elapsed Time (s)	Background Type	Serialize	Resource Lock	Flow Step Locked	Comment	
+						set-error-bin										9		9																				
+		calibrate				call	Subflow_HW_Check																															
+		CharEn				Test	CharSetup																															
+						Use-Limit	CharSetup	GPIB_ignorethis					#			5		5	Fail																			
+						Use-Limit	CharSetup	ThermoStatus		-0.1	0.1		#			5		5	Fail																			
+						Use-Limit	CharSetup	_Wafer		1	31		#			5		5	Fail																			
+						Use-Limit	CharSetup	_DeviceID		1			#			5		5	Fail																			
+						Use-Limit	CharSetup	_Temperature		-99	175		C			5		5	Fail																			
+						Use-Limit	CharSetup	RampRate		-0.1	9999.1		#			5		5	Fail																			
+						Use-Limit	CharSetup	Soaktime		-0.1	9999.1		s			5		5	Fail																			
+						Use-Limit	CharSetup	TempWindow		0.001	10		C			5		5	Fail																			
+						Use-Limit	CharSetup	_VsupplyA					V			5		5	Fail																			
+						Use-Limit	CharSetup	_VsupplB					V			5		5	Fail																			
+						Use-Limit	CharSetup	_VsupplyC					V			5		5	Fail																			
+						Use-Limit	CharSetup	_VsupplyD					V			5		5	Fail																			
+						Use-Limit	CharSetup	_VsupplyE					V			5		5	Fail																			
+						Test	COND_Zero												None																			
+						Test	Continuity_Pos	Continuity_Pos								5		5	Fail		cont_fail																	
+						Use-Limit	Continuity_Pos			0.3	0.7		V			5		5	Fail																			
+						Use-Limit	Continuity_Pos			0.15	0. 55		V			5		5	Fail																			
+						Test	Continuity_Neg	Continuity_Neg	100							5		5	Fail		cont_fail																	
+						Use-Limit	Continuity_Neg			-0.6	-0.3		V			5		5	Fail																			
+						Use-Limit	Continuity_Neg			-0.55	-0.2		V			5		5	Fail																			
+						Test	pin2pin_shorts		200							5		5	Fail		cont_fail																	
+						Use-Limit	pin2pin_shorts	pin2pin_shorts		-0.6	-0.3		V			5		5	Fail																			
+						Use-Limit	pin2pin_shorts	pin2pin_shorts		-0.5	-0.2		V			5		5	Fail																			
+						Test	Powersupply_Shorts		250										None		cont_fail																	
+						Use-Limit	Powersupply_Shorts	Powersupply_Shorts		= -1 * uA	0.00007	u	A			5		5	Fail																			
+						Use-Limit	Powersupply_Shorts	Powersupply_Shorts		0	0.00015	u	A			5		5	Fail																			
+						Use-Limit	Powersupply_Shorts	Powersupply_Shorts		=-50 * uA	0.0016	u	A			5		5	Fail																			
+						Use-Limit	Powersupply_Shorts	Powersupply_Shorts		0	0.00005	u	A			5		5	Fail																			
+						Use-Limit	Powersupply_Shorts	Powersupply_Shorts		0	0.00015	u	A			5		5	Fail																			
+						Test	COND_CHAR		1000										None																			
+						Test	Leakage_IIL_Hi_CHAR																															
+						Use-Limit	Leakage_IIL_Hi_CHAR	Leakage_PD_IIL_Hi		0.00001	0.0001	u	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	Leakage_IIH_Lo																															
+						Use-Limit	Leakage_IIH_Lo	Leakage_PU_IIH_Lo		-0.00012	-0.00003	u	A			8		10	Fail																			
+						Test	Leakage_IIL_Lo																															
+						Use-Limit	Leakage_IIL_Lo	Leakage_PD_IIL_Lo		-0.000001	0.000001	u	A			8		10	Fail																			
+						Use-Limit	Leakage_IIL_Lo	Leakage_PD_IIL_Lo		-0.000001	0.000001	u	A			8		10	Fail																			
+						Test	Leakage_IIH_Hi_CHAR																															
+						Use-Limit	Leakage_IIH_Hi_CHAR	Leakage_PU_IIH_Hi		-0.000001	0.000001	u	A			8		10	Fail																			
+						Use-Limit	Leakage_IIH_Hi_CHAR	Leakage_PU_IIH_Hi		-0.000001	0.000001	u	A			8		10	Fail																			
+						Test	XTAL_Parametrics		1200																													
+						Use-Limit	XTAL_Parametrics	XTALI_IIL_Hi		0	0.000025	u	A			8		10	Fail																			
+						Use-Limit	XTAL_Parametrics	XTALO_VOL		0	0.15		V			8		10	Fail																			
+						Use-Limit	XTAL_Parametrics	XTALI_IIL_Lo		-0.000025	0	u	A			8		10	Fail																			
+						Use-Limit	XTAL_Parametrics	XTALO_VOH		2.9	3.7		V			8		10	Fail																			
+						Test	REXT_Voltage																															
+						Use-Limit	REXT_Voltage	REXT_Voltage		1.15	1.25		V			8		10	Fail																			
+						Test	Process_Monitor												None																			
+						Use-Limit	Process_Monitor	GePmCntDone_RVT		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Process_Monitor	GePmCntErr_RVT		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Process_Monitor	GePmFreq_RVT				M	Hz			8		10	Fail																			
+						Use-Limit	Process_Monitor	GePmCntDone_LVT		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Process_Monitor	GePmCntErr_LVT		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Process_Monitor	GePmFreq_LVT				M	Hz			8		10	Fail																			
+						Use-Limit	Process_Monitor	GePmCntDone_HVT		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Process_Monitor	GePmCntErr_HVT		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Process_Monitor	GePmFreq_HVT				M	Hz			8		10	Fail																			
+						Test	Clock_Frequency												None																			
+						Use-Limit	Clock_Frequency	GE_Clk_25MHz		24900000	25100000	M	Hz	9.5		8		10	Fail																			
+						Use-Limit	Clock_Frequency	GE_Clk_Hrt_Free_125MHz		124900000	125100000	M	Hz	9.5		8		10	Fail																			
+						Use-Limit	Clock_Frequency	GE_Clk_Hrt_Rcvr_125MHz		124900000	125100000	M	Hz	9.5		8		10	Fail																			
+						Use-Limit	Clock_Frequency	GE_Clk_Free_125MHz		124900000	125100000	M	Hz	9.5		8		10	Fail																			
+						Use-Limit	Clock_Frequency	GE_Clk_Rcvr_125MHz		124900000	125100000	M	Hz	9.5		8		10	Fail																			
+						Use-Limit	Clock_Frequency	GE_Test_Clk_En_125MHz		124900000	125100000	M	Hz	9.5		8		10	Fail																			
+			!ADIN1200_A0			Use-Limit	Clock_Frequency	GE_Clk_Ref_25MHz		24900000	25100000	M	Hz	9.5		8		10	Fail																			
+						Test	MII_TXCLK_Freq		1300										None																			
+						Use-Limit	MII_TXCLK_Freq	MII_10M_TX_CLK		2490000	2510000	M	Hz	9.5		8		10	Fail																			
+						Use-Limit	MII_TXCLK_Freq	MII_100M_TX_CLK		24900000	25100000	M	Hz	9.5		8		10	Fail																			
+			!ADIN1200_A0_CHAR			Test	Analog_Parametric												None																			
+						Use-Limit	Analog_Parametric	Common_Mode_Voltage		1.5	1.9		V			8		10	Fail																			
+						Use-Limit	Analog_Parametric	Single_Ended_Impedance		45	60		Ohms			8		10	Fail																			
+			ADIN1200_A0_CHAR			Test	ADIN1200_Analog_Parametric												None																			
+						Use-Limit	ADIN1200_Analog_Parametric	Common_Mode_Voltage		1.5	1.9		V			8		10	Fail																			
+						Use-Limit	ADIN1200_Analog_Parametric	Single_Ended_Impedance		45	60		Ohms			8		10	Fail																			
+			ADIN1200_A0_CHAR			Test	ADIN1200_Regulator												None																			
+						Use-Limit	ADIN1200_Regulator	I_load_0mA		0	0.02	m	A			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	I_load_0mA		0	0.01	m	A			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	Vreg_load_0mA		0.86	0.94	m	V			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	I_load_70mA		0	0.02	m	A			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	I_load_70mA		0.06	0.2	m	A			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	Vreg_load_70mA		0.75	0.8	m	V			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	I_load_0mA		0	0.02	m	A			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	I_load_0mA		0	0.01	m	A			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	Vreg_load_0mA		0.86	0.94	m	V			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	I_load_70mA		0	0.02	m	A			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	I_load_70mA		0.06	0.2	m	A			8		10	Fail																			
+						Use-Limit	ADIN1200_Regulator	Vreg_load_70mA		0.75	0.8	m	V			8		10	Fail																			
+						call	Subflow_Scan		2000																													
+			!ADIN1200_A0_CHAR			Test	Func_ADIN1300_MLS_adv_Speed_Cfg_1									8		8	Fail																			
+			!ADIN1200_A0_CHAR			Test	Func_ADIN1300_MLS_adv_Speed_Cfg_2									8		8	Fail																			
+			!ADIN1200_A0_CHAR			Test	Func_ADIN1300_MLS_adv_Speed_Cfg_3									8		8	Fail																			
+			ADIN1200_A0_CHAR			Test	Func_ADIN1200_MLS_adv_Speed_Cfg									8		8	Fail																			
+			ADIN1200_A0_CHAR			Test	Func_ADIN1200_MLS_frc_Speed_Cfg									8		8	Fail																			
+						Test	Func_MLS_auto_mdix_Cfg_0_3									8		8	Fail																			
+						Test	Func_MLS_auto_mdix_Cfg_1_2									8		8	Fail																			
+			ADIN1301_A0_CHAR			Test	Func_MLS_energy_Det_Cfg_0_3									8		8	Fail																			
+			ADIN1301_A0_CHAR			Test	Func_MLS_energy_Det_Cfg_1_2									8		8	Fail																			
+						Test	Func_IO_Mac_Phy_Cfg									8		8	Fail																		RMII is covered in RMII dedicated test	
+			ADIN1301_A0_CHAR			Test	Func_IO_Downspeed_Cfg									8		8	Fail																		RMII is covered in RMII dedicated test	
+			ADIN1301_A0_CHAR			Test	Func_IO_EEE_Cfg									8		8	Fail																		RMII is covered in RMII dedicated test	
+						Test	Func_bscan_jtag									8		8	Fail																			
+			!ADIN1200_A0_CHAR			Test	Func_Grandlpbk_1000T									8		8	Fail																			
+						Test	Func_Grandlpbk_100T									8		8	Fail																			
+						Test	Func_Grandlpbk_10T									8		8	Fail																			
+			ADIN1301_A0_CHAR			Test	Extlpbk_GMII_1000T												None																			
+						Use-Limit	Extlpbk_GMII_1000T	Link_Status_GIG		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Extlpbk_GMII_1000T	HcdTech_GIG		5	5	No		%#x		8		10	Fail																			
+						Use-Limit	Extlpbk_GMII_1000T	GMII_GIG_FgDone		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Extlpbk_GMII_1000T	GMII_GIG_RxErrCnt		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Extlpbk_GMII_1000T	GMII_GIG_FcFrmCntH		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Extlpbk_GMII_1000T	GMII_GIG_FcFrmCntL		10	10	No		%#x		8		10	Fail																			
+			!ADIN1200_A0_CHAR			Test	Grandlpbk_1000T												None																			
+						Use-Limit	Grandlpbk_1000T	Link_Status_GIG		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_1000T	HcdTech_GIG		5	5	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_1000T	RGMII_GIG_FgDone_Rxdly_1_Txdly_0		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_1000T	RGMII_GIG_RxErrCnt_Rxdly_1_Txdly_0		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_1000T	RGMII_GIG_FcFrmCntH_Rxdly_1_Txdly_0		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_1000T	RGMII_GIG_FcFrmCntL_Rxdly_1_Txdly_0		10	10	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_1000T	RGMII_GIG_FgDone_Rxdly_0_Txdly_1		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_1000T	RGMII_GIG_RxErrCnt_Rxdly_0_Txdly_1		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_1000T	RGMII_GIG_FcFrmCntH_Rxdly_0_Txdly_1		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_1000T	RGMII_GIG_FcFrmCntL_Rxdly_0_Txdly_1		10	10	No		%#x		8		10	Fail																			
+						Test	Grandlpbk_100T												None																			
+						Use-Limit	Grandlpbk_100T	Link_Status_MDI_100BaseT		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	HcdTech_MDI_100BaseT		3	3	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	RGMII_100M_FgDone_Rxdly_1_Txdly_0		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	RGMII_100M_RxErrCnt_Rxdly_1_Txdly_0		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	RGMII_100M_FcFrmCntH_Rxdly_1_Txdly_0		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	RGMII_100M_FcFrmCntL_Rxdly_1_Txdly_0		10	10	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	RGMII_100M_FgDone_Rxdly_0_Txdly_1		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	RGMII_100M_RxErrCnt_Rxdly_0_Txdly_1		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	RGMII_100M_FcFrmCntH_Rxdly_0_Txdly_1		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	RGMII_100M_FcFrmCntL_Rxdly_0_Txdly_1		10	10	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	Link_Status_MDIX_100BaseT		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	HcdTech_MDIX_100BaseT		3	3	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	MII_100M_FgDone_GeMiiUseGtxClk_0		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	MII_100M_RxErrCnt_GeMiiUseGtxClk_0		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	MII_100M_FcFrmCntH_GeMiiUseGtxClk_0		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_100T	MII_100M_FcFrmCntL_GeMiiUseGtxClk_0		10	10	No		%#x		8		10	Fail																			
+						Test	Grandlpbk_10T												None																			
+						Use-Limit	Grandlpbk_10T	Link_Status_MDI_10BaseT		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	HcdTech_MDI_10BaseT		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	RGMII_10M_FgDone_Rxdly_1_Txdly_0		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	RGMII_10M_RxErrCnt_Rxdly_1_Txdly_0		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	RGMII_10M_FcFrmCntH_Rxdly_1_Txdly_0		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	RGMII_10M_FcFrmCntL_Rxdly_1_Txdly_0		10	10	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	RGMII_10M_FgDone_Rxdly_0_Txdly_1		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	RGMII_10M_RxErrCnt_Rxdly_0_Txdly_1		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	RGMII_10M_FcFrmCntH_Rxdly_0_Txdly_1		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	RGMII_10M_FcFrmCntL_Rxdly_0_Txdly_1		10	10	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	Link_Status_MDIX_10BaseT		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	HcdTech_MDIX_10BaseT		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	MII_10M_FgDone_GeMiiUseGtxClk_0		1	1	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	MII_10M_RxErrCnt_GeMiiUseGtxClk_0		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	MII_10M_FcFrmCntH_GeMiiUseGtxClk_0		0	0	No		%#x		8		10	Fail																			
+						Use-Limit	Grandlpbk_10T	MII_10M_FcFrmCntL_GeMiiUseGtxClk_0		10	10	No		%#x		8		10	Fail																			
+			!ADIN1200_A0_CHAR			Test	Func_lb_all_dig_b1000_Rgmii_dly_on									8		8	Fail																			
+			!ADIN1200_A0_CHAR			Test	Func_lb_all_dig_b1000_Rgmii_dly_off									8		8	Fail																			
+			ADIN1301_A0_CHAR			Test	Func_lb_all_dig_b1000_gmii									8		8	Fail																			
+						Test	Func_lb_all_dig_b100_Rgmii_dly_on									8		8	Fail																			
+						Test	Func_lb_all_dig_b100_Rgmii_dly_off									8		8	Fail																			
+						Test	Func_lb_all_dig_b10_Rgmii_dly_on									8		8	Fail																			
+						Test	Func_lb_all_dig_b10_Rgmii_dly_off									8		8	Fail																			
+						Test	Func_lb_all_dig_b100_mii_gtxclk									8		8	Fail																			
+						Test	Func_lb_all_dig_b10_mii_gtxclk									8		8	Fail																			
+			!ADIN1301_A0_CHAR			Test	Func_lb_all_dig_b100_mii_txclk									8		8	Fail																			
+			ADIN1301_A0_CHAR			Test	Func_lb_all_dig_b100_mii_txclk_64pkg									8		8	Fail																			
+						nop	Func_lb_all_dig_b10_mii_txclk									8		8	Fail																			
+						Test	Func_lb_all_dig_b100_Rmii									8		8	Fail																			
+						Test	Func_lb_all_dig_b10_Rmii									8		8	Fail																			
+		Analog				call	Subflow_Analog		3000																													
+		Power				call	Subflow_Power		4000										None																			
+		Levels				call	Subflow_Levels		5000																													
+		Timing				call	Subflow_Timing		6000										None																			
+						Test	IDDQ		7000										None																			
+						Use-Limit	IDDQ	IDDQ_GEPHY		0.00001	0.002	m	A			5		5	Fail																			
+						Use-Limit	IDDQ	IDDQ_GEPHY		0	0.005	m	A			5		5	Fail																			
+						Use-Limit	IDDQ	IDDQ_GEPHY		0.001	0.018	m	A			5		5	Fail																			
+						Use-Limit	IDDQ	IDDQ_GEPHY		0.00001	0.002	m	A			5		5	Fail																			
+						Use-Limit	IDDQ	IDDQ_GEPHY		0	0.002	m	A			5		5	Fail																			
+						set-device									1		1		Pass																			
+						stop																						flag-false	cont_fail									
+						Test	COND_AMVR_MAX																														Dummy test to Enable Levels in VBT code. Not to be used	
+						Test	COND_AMVR_MIN																														Dummy test to Enable Levels in VBT code. Not to be used	
+						Test	COND_AMVR_TYP																														Dummy test to Enable Levels in VBT code. Not to be used	

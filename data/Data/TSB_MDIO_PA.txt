@@ -1,0 +1,49 @@
+DTTimesetBasicSheet,version=2.3:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Time Sets (Basic)																	
+																		
+	Timing Mode:	Single		Master Timeset Name:														
+	Time Domain:			Strobe Ref Setup Name:														
+																		
+		Cycle	Pin/Group			Data		Drive				Compare				Edge Resolution		
+	Time Set	Period	Name	Clock Period	Setup	Src	Fmt	On	Data	Return	Off	Mode	Open	Close	Ref Offset	Mode	Comment	
+	timing_1_0	=_period	COL			PAT	NR		0		= C8 + J8	Edge	0.000000002			Machine		
+	timing_1_0	=_period	CRS			PAT	NR		0		= C9 + J9	Edge	0.000000002			Machine		
+	timing_1_0	=_period	GTX_CLK			PAT	NR		0		= C10 + J10	Edge	0.000000002			Machine		
+	timing_1_0	=_period	GP_CLK			PAT	NR		0		= C11 + J11	Edge	0.000000002			Machine		
+	timing_1_0	=_period	GP_OUT			PAT	NR		0		= C12 + J12	Edge	0.000000002			Machine		
+	timing_1_0	=_period	INT_N			PAT	NR		0		= C13 + J13	Edge	0.000000002			Machine		
+	timing_1_0	=_period	LED_0			PAT	NR		0		= C14 + J14	Edge	0.000000002			Machine		
+	timing_1_0	=_period	LED_1			PAT	NR		0		= C15 + J15	Edge	0.000000002			Machine		
+	timing_1_0	=_period	LED_2			PAT	NR		0		= C16 + J16	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RESET_N			PAT	NR		0		= C17 + J17	Edge	0.000000002			Machine		
+	timing_1_0	=_period	REF_CLK			PAT	NR		0		= C18 + J18	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RXD_0			PAT	NR		0		= C19 + J19	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RXD_1			PAT	NR		0		= C20 + J20	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RXD_2			PAT	NR		0		= C21 + J21	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RXD_3			PAT	NR		0		= C22 + J22	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RXD_4			PAT	NR		0		= C23 + J23	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RXD_5			PAT	NR		0		= C24 + J24	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RXD_6			PAT	NR		0		= C25 + J25	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RXD_7			PAT	NR		0		= C26 + J26	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RX_CTL			PAT	NR		0		= C27 + J27	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RX_CLK			PAT	NR		0		= C28 + J28	Edge	0.000000002			Machine		
+	timing_1_0	=_period	RX_ER			PAT	NR		0		= C29 + J29	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TXD_0			PAT	NR		0		= C30 + J30	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TXD_1			PAT	NR		0		= C31 + J31	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TXD_2			PAT	NR		0		= C32 + J32	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TXD_3			PAT	NR		0		= C33 + J33	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TXD_4			PAT	NR		0		= C34 + J34	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TXD_5			PAT	NR		0		= C35 + J35	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TXD_6			PAT	NR		0		= C36 + J36	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TXD_7			PAT	NR		0		= C37 + J37	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TX_CTL			PAT	NR		0		= C38 + J38	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TX_CLK			PAT	NR		0		= C39 + J39	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TX_ER			PAT	NR		0		= C40 + J40	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TCK			PAT	NR		0		= C41 + J41	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TDI			PAT	NR		0		= C42 + J42	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TMS			PAT	NR		0		= C43 + J43	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TDO			PAT	NR		0		= C44 + J44	Edge	0.000000002			Machine		
+	timing_1_0	=_period	TEST_EN			PAT	NR		0		= C45 + J45	Edge	0.000000002			Machine		
+	timing_1_0	=_period	XTAL_I			PAT	NR		0		= C46 + J46	Edge	0.000000002			Machine		
+	timing_1_0	=_period	XTAL_O			PAT	NR		0		= C47 + J47	Edge	0.000000002			Machine		
+	mdio_timing	=_period	MDC		PA	PA	RTN		= 0.00000001	= (0.5 * C48) + J48	= C48 + J48	PA	= 0.5 * C48					
+	mdio_timing	=_period	MDIO		PA	PA	NR		0		= C49 + J49	PA	= 1 * C49					

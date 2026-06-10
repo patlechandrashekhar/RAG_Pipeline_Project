@@ -1,0 +1,36 @@
+DTLevelSheet,version=2.1:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Pin Levels					
+						
+	Pin/Group	Seq.	Parameter	Value	Comment	
+	AVDD3P3		Vps	=_avdd3p3		
+	AVDD3P3		Isc	0.2		
+	AVDD3P3		Tdelay	0.001		
+	VDDIO_R		Vps	=_vddio_r		
+	VDDIO_R		Isc	0.2		
+	VDDIO_R		Tdelay	0.001		
+	VDDIO		Vps	=_vddio_m		
+	VDDIO		Isc	0.2		
+	VDDIO		Tdelay	0.001		
+	alldigpins		Vil	= -0.3		
+	alldigpins		Vih	=_vddio_r + 0.3		
+	alldigpins		Vol	=_vddio_r * 0.5		
+	alldigpins		Voh	=_vddio_r * 0.5		
+	alldigpins		Iol	0		
+	alldigpins		Ioh	0		
+	alldigpins		Vt	0		
+	alldigpins		Vcl	=_Vcl_default		
+	alldigpins		Vch	=_Vch_default		
+	alldigpins		VoutLoTyp	0		
+	alldigpins		VoutHiTyp	0		
+	alldigpins		DriverMode	Largeswing-HiZ		
+	MDI_Pins		Vil	=- 0.3		
+	MDI_Pins		Vih	=_avdd3p3 + 0.3		
+	MDI_Pins		Vol	=_avdd3p3 * 0.5		
+	MDI_Pins		Voh	=_avdd3p3 * 0.5		
+	MDI_Pins		Iol	0		
+	MDI_Pins		Ioh	0		
+	MDI_Pins		Vt	0		
+	MDI_Pins		Vcl	=_Vcl_default		
+	MDI_Pins		Vch	=_Vch_default		
+	MDI_Pins		VoutLoTyp	0		
+	MDI_Pins		VoutHiTyp	0		
+	MDI_Pins		DriverMode	Largeswing-HiZ		

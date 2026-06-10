@@ -1,0 +1,24 @@
+streamlit
+streamlit-chat-input-fileupload
+python-dotenv
+anthropic
+claude-agent-sdk>=0.2.111
+boto3
+httpx
+chromadb
+pdfplumber
+pypdf
+python-docx
+numpy
+PyMuPDF>=1.27.0
+docx2pdf>=0.1.8
+# LangChain stack
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-openai>=0.2.0
+langchain-anthropic>=0.2.0
+langchain-community>=0.3.0
+langchain-chroma>=0.1.0
+langchain-aws>=0.2.0
+langgraph>=0.2.0
+

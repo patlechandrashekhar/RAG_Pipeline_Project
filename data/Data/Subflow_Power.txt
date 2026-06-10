@@ -1,0 +1,77 @@
+DTFlowtableSheet,version=2.3:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Flow Table																																					
+						Flow Domain:																																
+			Gate			Command				Limits		Datalog Display Results			Bin Number		Sort Number			Action			Group				Device			Debug		CT Profile Data						
+	Label	Enable	Job	Part	Env	Opcode	Parameter	TName	TNum	LoLim	HiLim	Scale	Units	Format	Pass	Fail	Pass	Fail	Result	Pass	Fail	State	Specifier	Sense	Condition	Name	Sense	Condition	Name	Assume	Sites	Elapsed Time (s)	Background Type	Serialize	Resource Lock	Flow Step Locked	Comment	
+						Test	PowerSupply_SftPd												None																			
+						Use-Limit	PowerSupply_SftPd	Temperature_RGMII_1000T		-55	150	No	C			8		10	Fail																			
+						Use-Limit	PowerSupply_SftPd	Powersupply_SftPd		0	0.02	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_SftPd	Powersupply_SftPd		0	0.01	m	A			8		10	Fail																			
+			ADIN1300_A0_CHAR, ADIN1301_A0_CHAR			Use-Limit	PowerSupply_SftPd	Powersupply_SftPd		0	0.02	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_SftPd	Powersupply_SftPd		0	0.01	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_SftPd	Powersupply_SftPd		0	0.007	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_SftPd	Total_Power_SftPd		0	0.2	m	W			8		10	Fail																			
+			ADIN1301_A0_CHAR			Test	PowerSupply_GMII_1000T												None																			
+						Use-Limit	PowerSupply_GMII_1000T	Temperature_GMII_1000T		-55	150	No	C			8		10	Fail																			
+						Use-Limit	PowerSupply_GMII_1000T	Powersupply_GMII_1000T		0.065	0.18	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_GMII_1000T	Powersupply_GMII_1000T		0.05	0.15	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_GMII_1000T	Powersupply_GMII_1000T		0.02	0.07	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_GMII_1000T	Powersupply_GMII_1000T		0.01	0.04	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_GMII_1000T	Powersupply_GMII_1000T		0	0.007	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_GMII_1000T	Total_Power_GMII_1000T		0.2	0.8	m	W			8		10	Fail																			
+			!ADIN1200_A0_CHAR			Test	PowerSupply_RGMII_1000T												None																			
+						Use-Limit	PowerSupply_RGMII_1000T	Temperature_RGMII_1000T		-55	150	No	C			8		10	Fail																			
+						Use-Limit	PowerSupply_RGMII_1000T	Powersupply_RGMII_1000T		0.065	0.18	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_RGMII_1000T	Powersupply_RGMII_1000T		0.03	0.15	m	A			8		10	Fail																			
+			ADIN1300_A0_CHAR, ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RGMII_1000T	Powersupply_RGMII_1000T		0.02	0.07	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RGMII_1000T	Powersupply_SftPd		0.01	0.04	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RGMII_1000T	Powersupply_SftPd		0	0.007	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_RGMII_1000T	Total_Power_RGMII_1000T		0.2	0.8	m	W			8		10	Fail																			
+						Test	PowerSupply_RGMII_100T												None																			
+						Use-Limit	PowerSupply_RGMII_100T	Temperature_RGMII_100T		-55	150	No	C			8		10	Fail																			
+						Use-Limit	PowerSupply_RGMII_100T	Powersupply_RGMII_100T		0.02	0.08	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_RGMII_100T	Powersupply_RGMII_100T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1300_A0_CHAR, ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RGMII_100T	Powersupply_RGMII_100T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RGMII_100T	Powersupply_SftPd		0	0.015	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RGMII_100T	Powersupply_SftPd		0	0.007	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_RGMII_100T	Total_Power_RGMII_100T		0.05	0.4	m	W			8		10	Fail																			
+						Test	PowerSupply_RGMII_10T												None																			
+						Use-Limit	PowerSupply_RGMII_10T	Temperature_RGMII_10T		-55	150	No	C			8		10	Fail																			
+						Use-Limit	PowerSupply_RGMII_10T	Powersupply_RGMII_10T		0.02	0.08	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_RGMII_10T	Powersupply_RGMII_10T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1300_A0_CHAR, ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RGMII_10T	Powersupply_RGMII_10T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RGMII_10T	Powersupply_SftPd		0	0.015	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RGMII_10T	Powersupply_SftPd		0	0.01	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_RGMII_10T	Total_Power_RGMII_10T		0.05	0.4	m	W			8		10	Fail																			
+						Test	PowerSupply_MII_100T												None																			
+						Use-Limit	PowerSupply_MII_100T	Temperature_MII_100T		-55	150	No	C			8		10	Fail																			
+						Use-Limit	PowerSupply_MII_100T	Powersupply_MII_100T		0.02	0.08	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_MII_100T	Powersupply_MII_100T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1300_A0_CHAR, ADIN1301_A0_CHAR			Use-Limit	PowerSupply_MII_100T	Powersupply_MII_100T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_MII_100T	Powersupply_SftPd		0	0.015	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_MII_100T	Powersupply_SftPd		0	0.007	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_MII_100T	Total_Power_MII_100T		0.05	0.4	m	W			8		10	Fail																			
+						Test	PowerSupply_MII_10T												None																			
+						Use-Limit	PowerSupply_MII_10T	Temperature_MII_10T		-55	150	No	C			8		10	Fail																			
+						Use-Limit	PowerSupply_MII_10T	Powersupply_MII_10T		0.02	0.08	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_MII_10T	Powersupply_MII_10T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1300_A0_CHAR, ADIN1301_A0_CHAR			Use-Limit	PowerSupply_MII_10T	Powersupply_MII_10T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_MII_10T	Powersupply_SftPd		0	0.015	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_MII_10T	Powersupply_SftPd		0	0.01	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_MII_10T	Total_Power_MII_10T		0.05	0.4	m	W			8		10	Fail																			
+						Test	PowerSupply_RMII_100T												None																			
+						Use-Limit	PowerSupply_RMII_100T	Temperature_RMII_100T		-55	150	No	C			8		10	Fail																			
+						Use-Limit	PowerSupply_RMII_100T	Powersupply_RMII_100T		0.02	0.08	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_RMII_100T	Powersupply_RMII_100T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1300_A0_CHAR, ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RMII_100T	Powersupply_RMII_100T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RMII_100T	Powersupply_SftPd		0	0.015	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RMII_100T	Powersupply_SftPd		0	0.007	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_RMII_100T	Total_Power_RMII_100T		0.05	0.4	m	W			8		10	Fail																			
+						Test	PowerSupply_RMII_10T												None																			
+						Use-Limit	PowerSupply_RMII_10T	Temperature_RMII_10T		-55	150	No	C			8		10	Fail																			
+						Use-Limit	PowerSupply_RMII_10T	Powersupply_RMII_10T		0.02	0.08	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_RMII_10T	Powersupply_RMII_10T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1300_A0_CHAR, ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RMII_10T	Powersupply_RMII_10T		0.001	0.05	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RMII_10T	Powersupply_SftPd		0	0.015	m	A			8		10	Fail																			
+			ADIN1301_A0_CHAR			Use-Limit	PowerSupply_RMII_10T	Powersupply_SftPd		0	0.01	m	A			8		10	Fail																			
+						Use-Limit	PowerSupply_RMII_10T	Total_Power_RMII_10T		0.05	0.4	m	W			8		10	Fail																			
+						return																																

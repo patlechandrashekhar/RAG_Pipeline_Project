@@ -1,0 +1,49 @@
+DTFlowtableSheet,version=2.3:platform=Jaguar:toprow=-1:leftcol=-1:rightcol=-1	Flow Table																																					
+						Flow Domain:																																
+			Gate			Command				Limits		Datalog Display Results			Bin Number		Sort Number			Action			Group				Device			Debug		CT Profile Data						
+	Label	Enable	Job	Part	Env	Opcode	Parameter	TName	TNum	LoLim	HiLim	Scale	Units	Format	Pass	Fail	Pass	Fail	Result	Pass	Fail	State	Specifier	Sense	Condition	Name	Sense	Condition	Name	Assume	Sites	Elapsed Time (s)	Background Type	Serialize	Resource Lock	Flow Step Locked	Comment	
+						Test	MDIO_Timing												None																			
+						Use-Limit	MDIO_Timing	MDIO_Setup_Time		= 0 * ns	= 10 * ns	n	s			8		10	Fail																			
+						Use-Limit	MDIO_Timing	MDIO_Hold_Time		= -5 * ns	= 10 * ns	n	s			8		10	Fail																			
+						Test	Rst_dly_Timing												None																			
+						Use-Limit	Rst_dly_Timing	Out_Of_Reset_Time		= 20 * us	= 100 * us	u	s			8		10	Fail																			
+			ADIN1301_A0_CHAR, ADIN1301_A0			Test	GMII_B1000_dly_Timing												None																			
+						Use-Limit	GMII_B1000_dly_Timing	Setup_Time_GMII_1G		= -2 * ns	= 2.5 * ns	n	s			8		10	Fail																			
+						Use-Limit	GMII_B1000_dly_Timing	Hold_Time_GMII_1G		= -2 * ns	= 0.5 * ns	n	s			8		10	Fail																			
+			!ADIN1200_A0_CHAR, !ADIN1200_A0			Test	RGMII_B1000_no_dly_Timing												None																			
+						Use-Limit	RGMII_B1000_no_dly_Timing	Setup_Time_RGMII_1G_NODLY		= -1 * ns	= 1 * ns	n	s			8		10	Fail																			
+						Use-Limit	RGMII_B1000_no_dly_Timing	Hold_Time_RGMII_1G_NODLY		= -1 * ns	= 1 * ns	n	s			8		10	Fail																			
+			!ADIN1200_A0_CHAR, !ADIN1200_A0			Test	RGMII_B1000_dly_Timing												None																			
+						Use-Limit	RGMII_B1000_dly_Timing	Setup_Time_RGMII_1G_DLY		= -3 * ns	= -1 * ns	n	s			8		10	Fail																			
+						Use-Limit	RGMII_B1000_dly_Timing	Hold_Time_RGMII_1G_DLY		= 1 * ns	= 3 * ns	n	s			8		10	Fail																			
+						Test	RGMII_B100_no_dly_Timing												None																			
+						Use-Limit	RGMII_B100_no_dly_Timing	Setup_Time_RGMII_100M_NODLY		= -1 * ns	= 1 * ns	n	s			8		10	Fail																			
+						Use-Limit	RGMII_B100_no_dly_Timing	Hold_Time_RGMII_100M_NODLY		= -1 * ns	= 1 * ns	n	s			8		10	Fail																			
+						Test	RGMII_B100_dly_Timing												None																			
+						Use-Limit	RGMII_B100_dly_Timing	Setup_Time_RGMII_100M_DLY		= -3 * ns	= -1 * ns	n	s			8		10	Fail																			
+						Use-Limit	RGMII_B100_dly_Timing	Hold_Time_RGMII_100M_DLY		= 1 * ns	= 3 * ns	n	s			8		10	Fail																			
+						Test	RGMII_B10_no_dly_Timing												None																			
+						Use-Limit	RGMII_B10_no_dly_Timing	Setup_Time_RGMII_10M_NODLY		= -1 * ns	= 1 * ns	n	s			8		10	Fail																			
+						Use-Limit	RGMII_B10_no_dly_Timing	Hold_Time_RGMII_10M_NODLY		= -1 * ns	= 1 * ns	n	s			8		10	Fail																			
+						Test	RGMII_B10_dly_Timing												None																			
+						Use-Limit	RGMII_B10_dly_Timing	Setup_Time_RGMII_10M_DLY		= -3 * ns	= -1 * ns	n	s			8		10	Fail																			
+						Use-Limit	RGMII_B10_dly_Timing	Hold_Time_RGMII_10M_DLY		= 1 * ns	= 3 * ns	n	s			8		10	Fail																			
+						Test	MII_B100_Timing												None																			
+						Use-Limit	MII_B100_Timing	Setup_Time_MII_100M		= -10 * ns	= 10 * ns	n	s			8		10	Fail																			
+						Use-Limit	MII_B100_Timing	Hold_Time_MII_100M		= -10 * ns	= 10 * ns	n	s			8		10	Fail																			
+						Test	MII_B10_Timing												None																			
+						Use-Limit	MII_B10_Timing	Setup_Time_MII_10M_NODLY		= -10 * ns	= 10 * ns	n	s			8		10	Fail																			
+						Use-Limit	MII_B10_Timing	Hold_Time_MII_10M_NODLY		= -10 * ns	= 10 * ns	n	s			8		10	Fail																			
+			!ADIN1301_A0_CHAR, !ADIN1301_A0			Test	MII_TXCLK_B100_Timing												None																			
+						Use-Limit	MII_TXCLK_B100_Timing	Setup_Time_MII_100M		= -10 * ns	= 10 * ns	n	s			8		10	Fail																			
+						Use-Limit	MII_TXCLK_B100_Timing	Hold_Time_MII_100M		= -10 * ns	= 10 * ns	n	s			8		10	Fail																			
+			ADIN1301_A0_CHAR, ADIN1301_A0			Test	MII_TXCLK_B100_Timing_64pkg												None																			
+						Use-Limit	MII_TXCLK_B100_Timing_64pkg	Setup_Time_MII_100M		= -10 * ns	= 10 * ns	n	s			8		10	Fail																			
+						Use-Limit	MII_TXCLK_B100_Timing_64pkg	Hold_Time_MII_100M		= -10 * ns	= 10 * ns	n	s			8		10	Fail																			
+						Test	RMII_B100_Timing												None																			
+						Use-Limit	RMII_B100_Timing	Setup_Time_RMII_100M		= -2 * ns	= 4 * ns	n	s			8		10	Fail																			
+						Use-Limit	RMII_B100_Timing	Hold_Time_RMII_100M		= -4 * ns	= 2 * ns	n	s			8		10	Fail																			
+						Test	RMII_B10_Timing												None																			
+						Use-Limit	RMII_B10_Timing	Setup_Time_RMII_10M		= -2 * ns	= 4 * ns	n	s			8		10	Fail																			
+						Use-Limit	RMII_B10_Timing	Hold_Time_RMII_10M		= -4 * ns	= 2 * ns	n	s			8		10	Fail																			
+						return																																
