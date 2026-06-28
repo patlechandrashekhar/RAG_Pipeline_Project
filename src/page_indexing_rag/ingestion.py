@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import functools
 import hashlib
 import logging
 import os
@@ -449,7 +450,7 @@ def get_openai_embedding(text: str) -> list[float]:
     return _lc_embeddings.embed_query(text)
 
 
-@st.cache_resource
+@functools.lru_cache(maxsize=1)
 def get_chroma_collection():
     try:
         chroma_client = chromadb.PersistentClient(path=CHROMA_PATH)

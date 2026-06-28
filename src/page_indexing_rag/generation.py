@@ -151,7 +151,7 @@ def route_model(complexity: str) -> str:
         import streamlit as st
         if "selected_model" in st.session_state:
             return st.session_state["selected_model"]
-    except:
+    except Exception:
         pass
     # Fall back to default from config
     return OPENAI_ANSWER_MODEL

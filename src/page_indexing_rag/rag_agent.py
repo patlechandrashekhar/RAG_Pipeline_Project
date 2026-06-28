@@ -254,7 +254,6 @@ class SemiconductorRAGAgent:
         import random
         random.seed(hash(text) % 2**32)
         return [random.random() for _ in range(self.embedding_dimensions)]
-        return [0.0] * self.embedding_dimensions
 
     async def process_document(self, file_path: str, source_name: Optional[str] = None,
                               force_reingest: bool = False) -> Tuple[str, int]:

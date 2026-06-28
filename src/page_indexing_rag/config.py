@@ -10,7 +10,7 @@ import glob
 import httpx
 from dotenv import load_dotenv
 from openai import OpenAI
-from anthropic import Anthropic
+
 
 
 # Keep legacy SSL behavior from the original app.
